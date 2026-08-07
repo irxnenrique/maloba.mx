@@ -4,13 +4,15 @@ Esta aplicación necesita un servicio Node persistente y un volumen. No debe des
 
 ## 1. Cambiar las credenciales antes de subir
 
-Genera una contraseña segura:
+Actualiza la contraseña local:
 
 ```bash
 npm run password -- "TU-CONTRASEÑA-NUEVA"
 ```
 
-Guarda el hash resultante; se añadirá como variable secreta en Railway. Genera también una clave de sesión de al menos 32 caracteres, por ejemplo:
+El comando reemplaza automáticamente `ADMIN_PASSWORD_HASH` dentro de `.env`. Reinicia el servidor para aplicar el cambio. Después copia ese nuevo valor desde `.env` a la variable `ADMIN_PASSWORD_HASH` de Railway.
+
+Genera también una clave de sesión de al menos 32 caracteres, por ejemplo:
 
 ```bash
 openssl rand -hex 32

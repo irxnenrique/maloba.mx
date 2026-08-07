@@ -36,7 +36,7 @@ Las credenciales y la clave de sesión se leen desde `.env`. El archivo local ya
 npm run password -- "una-contraseña-nueva-y-segura"
 ```
 
-Copia el hash resultante en `ADMIN_PASSWORD_HASH` dentro de `.env`. Cambia también `ADMIN_USERNAME` y `SESSION_SECRET` antes de desplegar. Nunca publiques ni subas `.env` al repositorio.
+El comando reemplaza automáticamente `ADMIN_PASSWORD_HASH` dentro de `.env`. Reinicia el servidor para aplicar el cambio. Cambia también `ADMIN_USERNAME` y `SESSION_SECRET` antes de desplegar. Nunca publiques ni subas `.env` al repositorio.
 
 En producción con HTTPS configura `COOKIE_SECURE=true`. Para desarrollo local debe permanecer en `false`.
 
