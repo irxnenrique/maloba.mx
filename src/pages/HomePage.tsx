@@ -14,6 +14,7 @@ const services = [
   'Diseño digital',
   'Contenido para redes',
 ];
+const currentYear = new Date().getFullYear().toString();
 export function HomePage() {
   const reduce = useReducedMotion();
   const projects = useProjects();
@@ -48,7 +49,7 @@ export function HomePage() {
           <span>
             CDMX · MX
             <br />
-            2026
+            {currentYear}
           </span>
         </div>
         <h1>
@@ -63,8 +64,8 @@ export function HomePage() {
           </a>
         </div>
         <div className="orbit-mark" aria-hidden="true">
-          <span>20</span>
-          <span>26</span>
+          <span>{currentYear.slice(0, 2)}</span>
+          <span>{currentYear.slice(2)}</span>
         </div>
       </section>
       <section className="projects section-shell" id="projects">
@@ -143,7 +144,7 @@ export function HomePage() {
         <footer>
           <span>maloba®</span>
           <span>Identidades para recordar.</span>
-          <span>© 2026</span>
+          <span>© {currentYear}</span>
         </footer>
       </section>
     </motion.main>

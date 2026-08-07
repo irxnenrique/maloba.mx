@@ -1,10 +1,11 @@
 import type { Project } from '../types/project';
+const currentYear = new Date().getFullYear().toString();
 export const projects: Project[] = [
   {
     slug: 'luma-future-foods',
     name: 'Luma',
     client: 'Luma Future Foods',
-    year: '2026',
+    year: currentYear,
     category: 'Identidad & packaging',
     description: 'Una marca solar para una nueva generación de alimentos vegetales.',
     services: ['Estrategia de marca', 'Identidad visual', 'Packaging'],
