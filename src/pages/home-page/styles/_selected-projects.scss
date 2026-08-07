@@ -1,5 +1,9 @@
 @use '@app/styles/abstracts/variables' as v;
 
+.projects {
+  scroll-margin-top: 2rem;
+}
+
 .section-heading {
   padding: v.$space-xl 0 v.$space-lg;
   display: grid;

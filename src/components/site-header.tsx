@@ -10,7 +10,7 @@ export function SiteHeader() {
   const language = getSelectedLanguage();
   const labels = m(common, 'nav');
   const destinations = [
-    `/${language}/projects`,
+    `/${language}#projects`,
     `/${language}#studio`,
     `/${language}#services`,
     `/${language}#contact`,
