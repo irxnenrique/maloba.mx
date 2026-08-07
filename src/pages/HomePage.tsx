@@ -108,13 +108,10 @@ export function HomePage() {
         <p className="section-kicker">03 — Lo que hacemos</p>
         <div className="service-list">
           {services.map((service, index) => (
-            <Reveal key={service}>
-              <div className="service-row">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <h3>{service}</h3>
-                <span className="service-arrow">↗</span>
-              </div>
-            </Reveal>
+            <div className="service-row" key={service}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{service}</h3>
+            </div>
           ))}
         </div>
       </section>
