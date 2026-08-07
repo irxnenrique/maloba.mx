@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 
 export function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
   const [username, setUsername] = useState('');
@@ -55,7 +56,15 @@ export function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
           />
         </label>
         {error && <p role="alert">{error}</p>}
-        <button disabled={busy}>{busy ? 'Verificando…' : 'Entrar ↗'}</button>
+        <button disabled={busy}>
+          {busy ? (
+            'Verificando…'
+          ) : (
+            <>
+              Entrar <ArrowUpRight aria-hidden="true" />
+            </>
+          )}
+        </button>
       </form>
     </section>
   );

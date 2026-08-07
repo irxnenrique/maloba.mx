@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { ProjectCard } from '@components/project-card';
 import { Reveal } from '@components/reveal';
 import type { Project } from '@app-types/project';
@@ -27,7 +28,7 @@ export function SelectedProjects({ projects }: SelectedProjectsProps) {
         ))}
       </div>
       <Link className="all-projects-link" to={`/${language}/projects`}>
-        {m(projectMessages, 'viewAll')} <span>↗</span>
+        {m(projectMessages, 'viewAll')} <ArrowUpRight aria-hidden="true" />
       </Link>
     </section>
   );

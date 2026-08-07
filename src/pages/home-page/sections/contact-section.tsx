@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { ContactForm } from '@components/contact-form';
 import { currentYear } from '@data/site';
 import m, { contact } from '@i18n/messages';
@@ -18,13 +19,13 @@ export function ContactSection() {
             rel="noreferrer"
             aria-label={m(contact, 'whatsappLabel')}
           >
-            WhatsApp ↗
+            WhatsApp <ArrowUpRight aria-hidden="true" />
           </a>
           <a href="https://instagram.com/maloba.mx" target="_blank" rel="noreferrer">
-            Instagram ↗
+            Instagram <ArrowUpRight aria-hidden="true" />
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noreferrer">
-            LinkedIn ↗
+            LinkedIn <ArrowUpRight aria-hidden="true" />
           </a>
         </div>
       </div>

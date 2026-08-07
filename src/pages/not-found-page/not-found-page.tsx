@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import m, { getSelectedLanguage, notFound } from '@i18n/messages';
 export function NotFoundPage() {
@@ -10,7 +11,9 @@ export function NotFoundPage() {
         <br />
         <em>{m(notFound, 'emphasis')}</em>
       </h1>
-      <Link to={`/${language}`}>{m(notFound, 'back')} ↗</Link>
+      <Link to={`/${language}`}>
+        {m(notFound, 'back')} <ArrowUpRight aria-hidden="true" />
+      </Link>
     </main>
   );
 }

@@ -34,6 +34,15 @@
   gap: 1.5rem;
   font-size: v.$font-size-ui;
   text-transform: uppercase;
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  svg {
+    width: 1em;
+    height: 1em;
+  }
 }
 .contact {
   form {
@@ -88,9 +97,11 @@
     background: v.$ink;
     color: white;
   }
-  span {
+  svg {
     display: block;
-    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.25rem auto 0;
   }
 }
 .whatsapp-note {

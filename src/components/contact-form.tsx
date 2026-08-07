@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import m, { contact } from '@i18n/messages';
 type Fields = { name: string; message: string };
 const empty = { name: '', message: '' };
@@ -47,7 +48,7 @@ export function ContactForm() {
         {errors.message && <small>{errors.message}</small>}
       </label>
       <button className="submit-button" type="submit">
-        {m(contact, 'submit')} <span>↗</span>
+        {m(contact, 'submit')} <ArrowUpRight aria-hidden="true" />
       </button>
       <p className="whatsapp-note">{m(contact, 'note')}</p>
     </form>

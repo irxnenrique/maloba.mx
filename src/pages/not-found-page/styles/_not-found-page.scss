@@ -11,6 +11,13 @@
     line-height: 0.85;
   }
   a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     border-bottom: 1px solid;
+  }
+  svg {
+    width: 1em;
+    height: 1em;
   }
 }

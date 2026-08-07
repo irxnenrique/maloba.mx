@@ -41,6 +41,10 @@
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
 }
 .project-card {
   &:nth-child(6n + 1),

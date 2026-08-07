@@ -309,8 +309,10 @@
     background: v.$ink;
     color: v.$paper;
   }
-  span {
+  svg {
     display: block;
-    font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: 0.25rem auto 0;
   }
 }

@@ -174,9 +174,10 @@
   border-radius: 50%;
   background: v.$violet;
   color: v.$white;
-  span {
+  svg {
     display: block;
-    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 .archive-complete,

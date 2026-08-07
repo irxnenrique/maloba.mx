@@ -1,4 +1,5 @@
 import {
+  ArrowUpRight,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -263,7 +264,8 @@ export function ProjectManager({ onLogout }: { onLogout: () => void }) {
             </div>
           )}
           <button className="publish-button" type="submit">
-            {originalSlug ? 'Guardar cambios' : 'Publicar proyecto'} <span>↗</span>
+            {originalSlug ? 'Guardar cambios' : 'Publicar proyecto'}
+            <ArrowUpRight aria-hidden="true" />
           </button>
         </form>
 
