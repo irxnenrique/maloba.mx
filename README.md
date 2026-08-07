@@ -30,6 +30,8 @@ npm run preview
 
 El gestor no aparece en la navegación pública. Abre directamente `/admin-maloba` e inicia sesión para crear, actualizar o retirar proyectos. Los datos se guardan en `data/maloba.db` y las portadas en `uploads/`; ambos directorios deben conservarse en copias de seguridad y en cualquier despliegue.
 
+Los seis proyectos iniciales se insertan una sola vez, únicamente al crear una base vacía. El estado de esa migración se registra en `app_meta`; reiniciar el servidor ya no vuelve a insertar proyectos eliminados. Al arrancar, el servidor imprime la ruta exacta de la base que está utilizando.
+
 Las credenciales y la clave de sesión se leen desde `.env`. El archivo local ya contiene credenciales iniciales y está excluido de Git. Para cambiar la contraseña:
 
 ```bash
@@ -50,5 +52,7 @@ npm start
 ```
 
 El servidor Node entrega la aplicación, la API y las imágenes. El hosting debe soportar un proceso Node persistente y conservar `data/` y `uploads/` entre despliegues; un hosting exclusivamente estático ya no es suficiente. Configura HTTPS, `NODE_ENV=production`, `COOKIE_SECURE=true` y las variables secretas antes de exponerlo en internet.
+
+En Railway, `STORAGE_ROOT` debe ser `/app/storage` y el volumen debe estar montado en esa misma ruta. Si falta cualquiera de esas dos configuraciones, el deployment utilizará almacenamiento efímero y parecerá crear una base nueva.
 
 El proyecto incluye `railway.json`, un health check y soporte para `STORAGE_ROOT`. La guía completa para Railway y GoDaddy está en [`DEPLOYMENT.md`](./DEPLOYMENT.md).

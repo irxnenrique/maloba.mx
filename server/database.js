@@ -10,7 +10,8 @@ export const storageRoot = process.env.STORAGE_ROOT ? path.resolve(process.env.S
 const dataDirectory = path.join(storageRoot, 'data');
 fs.mkdirSync(dataDirectory, { recursive: true });
 
-export const database = new Database(path.join(dataDirectory, 'maloba.db'));
+export const databasePath = path.join(dataDirectory, 'maloba.db');
+export const database = new Database(databasePath);
 database.pragma('journal_mode = WAL');
 database.pragma('foreign_keys = ON');
 
@@ -40,6 +41,11 @@ database.exec(`
     sess TEXT NOT NULL,
     expired_at INTEGER NOT NULL
   );
+  CREATE TABLE IF NOT EXISTS app_meta (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
   CREATE INDEX IF NOT EXISTS sessions_expired_idx ON sessions(expired_at);
 `);
 
@@ -60,11 +66,18 @@ const insertSeed = database.prepare(`
   )
 `);
 
-database.transaction(() => {
-  for (const project of seedProjects) {
-    insertSeed.run({ ...project, services: JSON.stringify(project.services) });
-  }
-})();
+const initialSeed = database.prepare("SELECT value FROM app_meta WHERE key = 'initial_seed'").get();
+if (!initialSeed) {
+  database.transaction(() => {
+    const projectCount = database.prepare('SELECT COUNT(*) AS count FROM projects').get().count;
+    if (projectCount === 0) {
+      for (const project of seedProjects) {
+        insertSeed.run({ ...project, services: JSON.stringify(project.services) });
+      }
+    }
+    database.prepare("INSERT INTO app_meta (key, value) VALUES ('initial_seed', 'complete')").run();
+  })();
+}
 
 export function rowToProject(row) {
   return {

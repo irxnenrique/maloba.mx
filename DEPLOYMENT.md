@@ -66,6 +66,14 @@ Dentro del volumen, la aplicación creará automáticamente:
 
 Mantén una sola réplica del servicio. SQLite y un volumen local no deben compartirse entre múltiples réplicas.
 
+La ruta del volumen y `STORAGE_ROOT` deben coincidir exactamente. En los logs de inicio debe aparecer:
+
+```text
+Base persistente: /app/storage/data/maloba.db
+```
+
+Si aparece otra ruta, detén el deployment y corrige la variable o el punto de montaje antes de publicar contenido.
+
 ## 5. Configurar variables
 
 En el servicio, abre **Variables** y añade:

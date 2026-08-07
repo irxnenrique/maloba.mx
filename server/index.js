@@ -9,7 +9,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { database, rowToProject, SQLiteSessionStore, storageRoot } from './database.js';
+import {
+  database,
+  databasePath,
+  rowToProject,
+  SQLiteSessionStore,
+  storageRoot,
+} from './database.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const uploadsDirectory = path.join(storageRoot, 'uploads');
@@ -210,7 +216,7 @@ app.use((error, _request, response, _next) => {
 });
 
 const server = app.listen(port, '0.0.0.0', () =>
-  console.log(`maloba API lista en http://0.0.0.0:${port}`),
+  console.log(`maloba API lista en http://0.0.0.0:${port}\nBase persistente: ${databasePath}`),
 );
 
 function shutdown(signal) {
