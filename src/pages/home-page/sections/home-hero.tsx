@@ -1,6 +1,6 @@
 import { ArrowDownRight } from 'lucide-react';
-import { currentYear } from '../data/site';
-import m, { hero } from '../i18n/messages';
+import { currentYear } from '@data/site';
+import m, { hero } from '@i18n/messages';
 
 export function HomeHero() {
   return (

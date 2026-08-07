@@ -1,5 +1,5 @@
-import { Reveal } from '../components/Reveal';
-import m, { studio } from '../i18n/messages';
+import { Reveal } from '@components/reveal';
+import m, { studio } from '@i18n/messages';
 
 export function StudioManifesto() {
   return (

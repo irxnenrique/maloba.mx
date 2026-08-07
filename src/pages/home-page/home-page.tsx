@@ -1,12 +1,12 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { useProjects } from '../hooks/useProjects';
-import { ContactSection } from '../sections/ContactSection';
-import { HomeHero } from '../sections/HomeHero';
-import { SelectedProjects } from '../sections/SelectedProjects';
-import { ServicesSection } from '../sections/ServicesSection';
-import { StudioManifesto } from '../sections/StudioManifesto';
-import m, { common, getSelectedLanguage, hero } from '../i18n/messages';
+import { useProjects } from '@hooks/use-projects';
+import m, { common, getSelectedLanguage, hero } from '@i18n/messages';
+import { ContactSection } from '@home-page/sections/contact-section';
+import { HomeHero } from '@home-page/sections/home-hero';
+import { SelectedProjects } from '@home-page/sections/selected-projects';
+import { ServicesSection } from '@home-page/sections/services-section';
+import { StudioManifesto } from '@home-page/sections/studio-manifesto';
 
 export function HomePage() {
   const reduce = useReducedMotion();

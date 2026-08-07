@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import m, { caseStudy } from '../i18n/messages';
+import m, { caseStudy } from '@i18n/messages';
 
 type ImageLightboxProps = {
   images: string[];

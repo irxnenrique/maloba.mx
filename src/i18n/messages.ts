@@ -1,9 +1,10 @@
 import i18n from 'i18next';
-import type caseStudySchema from './locales/es/caseStudy.json';
+import type archiveSchema from './locales/es/archive.json';
+import type caseStudySchema from '@i18n/locales/es/case-study.json';
 import type commonSchema from './locales/es/common.json';
 import type contactSchema from './locales/es/contact.json';
 import type heroSchema from './locales/es/hero.json';
-import type notFoundSchema from './locales/es/notFound.json';
+import type notFoundSchema from '@i18n/locales/es/not-found.json';
 import type projectsSchema from './locales/es/projects.json';
 import type servicesSchema from './locales/es/services.json';
 import type studioSchema from './locales/es/studio.json';
@@ -26,6 +27,7 @@ export const services = defineMessages<typeof servicesSchema>('services');
 export const contact = defineMessages<typeof contactSchema>('contact');
 export const caseStudy = defineMessages<typeof caseStudySchema>('caseStudy');
 export const notFound = defineMessages<typeof notFoundSchema>('notFound');
+export const archive = defineMessages<typeof archiveSchema>('archive');
 
 export function getSelectedLanguage() {
   return languageFromPath(window.location.pathname);

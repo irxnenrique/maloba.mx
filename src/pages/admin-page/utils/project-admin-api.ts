@@ -1,42 +1,5 @@
-import { useEffect, useState } from 'react';
-import { projects as fallbackProjects } from '../data/projects';
-import type { Project } from '../types/project';
-
-let cache: Project[] = fallbackProjects;
-let requested = false;
-const listeners = new Set<(projects: Project[]) => void>();
-
-function notify(projects: Project[]) {
-  cache = projects;
-  listeners.forEach((listener) => listener(projects));
-}
-
-export async function refreshProjects() {
-  const response = await fetch('/api/projects');
-  if (!response.ok) throw new Error('No se pudieron cargar los proyectos');
-  const projects = (await response.json()) as Project[];
-  notify(projects);
-  return projects;
-}
-
-export function useProjects() {
-  const [projects, setProjects] = useState(cache);
-
-  useEffect(() => {
-    listeners.add(setProjects);
-    if (!requested) {
-      requested = true;
-      refreshProjects().catch(() => {
-        requested = false;
-      });
-    }
-    return () => {
-      listeners.delete(setProjects);
-    };
-  }, []);
-
-  return projects;
-}
+import { refreshProjects } from '@hooks/use-projects';
+import type { Project } from '@app-types/project';
 
 const adminHeaders = { 'Content-Type': 'application/json', 'x-maloba-admin': '1' };
 
@@ -59,7 +22,17 @@ export async function removeProject(slug: string) {
   await refreshProjects();
 }
 
-export async function uploadCover(file: File) {
+export async function reorderProjects(slugs: string[]) {
+  const response = await fetch('/api/admin/projects-order', {
+    method: 'PUT',
+    headers: adminHeaders,
+    body: JSON.stringify({ slugs }),
+  });
+  if (!response.ok) throw new Error((await response.json()).error || 'No se pudo guardar el orden');
+  await refreshProjects();
+}
+
+export async function uploadProjectImage(file: File) {
   const body = new FormData();
   body.append('image', file);
   const response = await fetch('/api/admin/upload', {
@@ -69,6 +42,13 @@ export async function uploadCover(file: File) {
   });
   if (!response.ok) throw new Error((await response.json()).error || 'No se pudo subir');
   return (await response.json()).url as string;
+}
+
+export async function logoutAdmin() {
+  await fetch('/api/admin/logout', {
+    method: 'POST',
+    headers: { 'x-maloba-admin': '1' },
+  });
 }
 
 export function slugify(value: string) {

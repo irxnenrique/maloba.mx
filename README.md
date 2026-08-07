@@ -22,9 +22,17 @@ npm run preview
 - **Colores, tipografías y espaciado:** edita `src/styles/tokens.css`.
 - **Estilos globales y responsive:** edita `src/styles/global.css`.
 - **Proyectos:** crea y actualiza contenido desde `/admin-maloba`. `src/data/projects.ts` funciona únicamente como respaldo si la API local no está disponible.
+- **Archivo de proyectos:** `/es/projects` y `/en/projects` agrupan todos los casos por año y muestran 10 registros por carga. El home utiliza únicamente los 10 proyectos más recientes devueltos por la base de datos.
 - **Imágenes:** las portadas y galerías subidas desde el gestor se almacenan en `uploads/`. La portada funciona como imagen principal y cada proyecto admite una cantidad abierta de imágenes de galería, limitada únicamente por el espacio disponible. La galería se puede reordenar arrastrando miniaturas o usando sus flechas; el orden se guarda junto con el proyecto. `Artwork.tsx` mantiene las composiciones gráficas para proyectos sin fotografía.
-- **Contacto:** edita WhatsApp y redes en `src/sections/ContactSection.tsx`. El formulario valida el nombre y el mensaje antes de abrir WhatsApp; no envía información automáticamente ni utiliza el servidor.
+- **Orden del home:** cada proyecto nuevo entra automáticamente en la primera posición. Desde `/admin-maloba` puedes moverlo con las flechas; únicamente los primeros 10 se muestran en la portada.
+- **Contacto:** edita WhatsApp y redes en `src/pages/home-page/sections/contact-section.tsx`. El formulario valida el nombre y el mensaje antes de abrir WhatsApp; no envía información automáticamente ni utiliza el servidor.
 - **Textos e idiomas:** las traducciones viven en archivos JSON separados por sección dentro de `src/i18n/locales/es/` y `src/i18n/locales/en/`. `react-i18next` usa español como fallback. La función `m` de `src/i18n/messages.ts` detecta el idioma directamente desde la URL, por lo que no se pasan idiomas entre componentes. Se usa como `m(projects, 'kicker')`, importando también la biblioteca de la sección. El sitio usa `/es` y `/en`, y `/` redirige a español. Desde el admin puedes capturar categoría, descripción, servicios, contexto, problema, concepto y solución en inglés para cada proyecto; los campos ingleses vacíos usan el contenido español como respaldo.
+
+## Organización del frontend
+
+Cada ruta vive en su propia carpeta dentro de `src/pages/` y se exporta mediante un `index.ts`. Todos los archivos del frontend usan `kebab-case`. Sus bloques exclusivos se guardan en `sections/`, mientras que sus hooks y utilidades privadas viven bajo `hooks/` y `utils/` dentro de la página. Los componentes reutilizables permanecen en `src/components/`; los controles de formulario compartidos están agrupados en `src/components/forms/`.
+
+Las páginas se consumen como librerías mediante los aliases `@home-page`, `@admin-page`, `@project-page`, `@projects-archive-page` y `@not-found-page`. También existen aliases compartidos como `@components`, `@hooks`, `@i18n`, `@data` y `@app-types`. Están configurados conjuntamente en `tsconfig.app.json` y `vite.config.ts`; no se necesita Webpack para desarrollo ni para Railway.
 
 ## Administración privada y base de datos
 

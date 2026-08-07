@@ -1,4 +1,4 @@
-import type { ArtworkKind } from '../types/project';
+import type { ArtworkKind } from '@app-types/project';
 export function Artwork({
   kind,
   name,

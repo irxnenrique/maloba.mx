@@ -1,9 +1,9 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import type { Project } from '../types/project';
-import { Artwork } from './Artwork';
-import m, { common, getSelectedLanguage } from '../i18n/messages';
+import type { Project } from '@app-types/project';
+import { Artwork } from '@components/artwork';
+import m, { common, getSelectedLanguage } from '@i18n/messages';
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   const reduce = useReducedMotion();
   const language = getSelectedLanguage();

@@ -76,7 +76,7 @@ const requireAdminHeader = (request, response, next) => {
 };
 
 app.get('/api/projects', (_request, response) => {
-  const rows = database.prepare('SELECT * FROM projects ORDER BY created_at DESC, rowid ASC').all();
+  const rows = database.prepare('SELECT * FROM projects ORDER BY home_order ASC, rowid ASC').all();
   response.json(rows.map(rowToProject));
 });
 
@@ -110,7 +110,6 @@ function normalizeProject(body) {
   const fields = [
     'slug',
     'name',
-    'client',
     'year',
     'category',
     'description',
@@ -136,6 +135,7 @@ function normalizeProject(body) {
     return null;
   return {
     ...project,
+    client: '',
     services: body.services.map((item) => String(item).trim()).filter(Boolean),
     coverImage: body.coverImage ? String(body.coverImage) : null,
     galleryImages: Array.isArray(body.galleryImages)
@@ -159,16 +159,21 @@ app.put('/api/admin/projects/:slug', requireAdmin, requireAdminHeader, (request,
   const project = normalizeProject({ ...request.body, slug: request.params.slug });
   if (!project)
     return response.status(400).json({ error: 'Datos de proyecto incompletos o inválidos' });
-  database
-    .prepare(
-      `INSERT INTO projects (
+  const existing = database
+    .prepare('SELECT home_order FROM projects WHERE slug = ?')
+    .get(project.slug);
+  const isNewProject = !existing;
+  const homeOrder = existing?.home_order ?? 0;
+  const saveProject = database.prepare(
+    `INSERT INTO projects (
     slug, name, client, year, category, description, services, accent, secondary, artwork,
     context, problem, concept, solution, cover_image, gallery_images, category_en,
-    description_en, services_en, context_en, problem_en, concept_en, solution_en
+    description_en, services_en, context_en, problem_en, concept_en, solution_en, home_order
   ) VALUES (
     @slug, @name, @client, @year, @category, @description, @services, @accent, @secondary,
     @artwork, @context, @problem, @concept, @solution, @coverImage, @galleryImages,
-    @categoryEn, @descriptionEn, @servicesEn, @contextEn, @problemEn, @conceptEn, @solutionEn
+    @categoryEn, @descriptionEn, @servicesEn, @contextEn, @problemEn, @conceptEn, @solutionEn,
+    @homeOrder
   ) ON CONFLICT(slug) DO UPDATE SET
     name=excluded.name, client=excluded.client, year=excluded.year, category=excluded.category,
     description=excluded.description, services=excluded.services, accent=excluded.accent,
@@ -180,14 +185,44 @@ app.put('/api/admin/projects/:slug', requireAdmin, requireAdminHeader, (request,
     problem_en=excluded.problem_en, concept_en=excluded.concept_en,
     solution_en=excluded.solution_en,
     updated_at=CURRENT_TIMESTAMP`,
-    )
-    .run({
+  );
+  database.transaction(() => {
+    if (isNewProject) {
+      database.prepare('UPDATE projects SET home_order = home_order + 1').run();
+    }
+    saveProject.run({
       ...project,
       services: JSON.stringify(project.services),
       galleryImages: JSON.stringify(project.galleryImages),
       servicesEn: JSON.stringify(project.servicesEn),
+      homeOrder,
     });
+  })();
   response.json(project);
+});
+
+app.put('/api/admin/projects-order', requireAdmin, requireAdminHeader, (request, response) => {
+  const slugs = Array.isArray(request.body?.slugs)
+    ? request.body.slugs.map((slug) => String(slug))
+    : [];
+  const storedSlugs = database
+    .prepare('SELECT slug FROM projects')
+    .all()
+    .map(({ slug }) => slug);
+  if (
+    slugs.length !== storedSlugs.length ||
+    new Set(slugs).size !== slugs.length ||
+    storedSlugs.some((slug) => !slugs.includes(slug))
+  ) {
+    return response.status(400).json({ error: 'El orden de proyectos es inválido' });
+  }
+  const updateOrder = database.prepare(
+    'UPDATE projects SET home_order = ?, updated_at = CURRENT_TIMESTAMP WHERE slug = ?',
+  );
+  database.transaction(() => {
+    slugs.forEach((slug, index) => updateOrder.run(index, slug));
+  })();
+  response.status(204).end();
 });
 
 app.delete('/api/admin/projects/:slug', requireAdmin, requireAdminHeader, (request, response) => {

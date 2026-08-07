@@ -1,4 +1,4 @@
-import type { Project } from '../types/project';
+import type { Project } from '@app-types/project';
 import type { Language } from '.';
 
 export function localizeProject(project: Project, language: Language): Project {

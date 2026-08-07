@@ -1,8 +1,9 @@
-import { ProjectCard } from '../components/ProjectCard';
-import { Reveal } from '../components/Reveal';
-import type { Project } from '../types/project';
-import { localizeProject } from '../i18n/projects';
-import m, { getSelectedLanguage, projects as projectMessages } from '../i18n/messages';
+import { ProjectCard } from '@components/project-card';
+import { Reveal } from '@components/reveal';
+import type { Project } from '@app-types/project';
+import { localizeProject } from '@i18n/projects';
+import m, { getSelectedLanguage, projects as projectMessages } from '@i18n/messages';
+import { Link } from 'react-router-dom';
 
 type SelectedProjectsProps = {
   projects: Project[];
@@ -21,7 +22,7 @@ export function SelectedProjects({ projects }: SelectedProjectsProps) {
         </h2>
       </Reveal>
       <div className="project-grid">
-        {projects.map((project, index) => (
+        {projects.slice(0, 10).map((project, index) => (
           <ProjectCard
             key={project.slug}
             project={localizeProject(project, language)}
@@ -29,6 +30,9 @@ export function SelectedProjects({ projects }: SelectedProjectsProps) {
           />
         ))}
       </div>
+      <Link className="all-projects-link" to={`/${language}/projects`}>
+        {m(projectMessages, 'viewAll')} <span>↗</span>
+      </Link>
     </section>
   );
 }

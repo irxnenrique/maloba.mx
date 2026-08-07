@@ -1,6 +1,6 @@
-import { ContactForm } from '../components/ContactForm';
-import { currentYear } from '../data/site';
-import m, { contact } from '../i18n/messages';
+import { ContactForm } from '@components/contact-form';
+import { currentYear } from '@data/site';
+import m, { contact } from '@i18n/messages';
 
 export function ContactSection() {
   return (

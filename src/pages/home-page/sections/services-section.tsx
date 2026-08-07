@@ -1,4 +1,4 @@
-import m, { services } from '../i18n/messages';
+import m, { services } from '@i18n/messages';
 
 export function ServicesSection() {
   const items = m(services, 'items');

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import m, { getSelectedLanguage, notFound } from '../i18n/messages';
+import m, { getSelectedLanguage, notFound } from '@i18n/messages';
 export function NotFoundPage() {
   const language = getSelectedLanguage();
   return (

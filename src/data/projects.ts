@@ -1,4 +1,4 @@
-import type { Project } from '../types/project';
+import type { Project } from '@app-types/project';
 const currentYear = new Date().getFullYear().toString();
 export const projects: Project[] = [
   {

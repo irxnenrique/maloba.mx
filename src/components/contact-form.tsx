@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import m, { contact } from '../i18n/messages';
+import m, { contact } from '@i18n/messages';
 type Fields = { name: string; message: string };
 const empty = { name: '', message: '' };
 const whatsappNumber = '523329292250';

@@ -1,16 +1,20 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import type { Language } from '../i18n';
-import m, { common, getSelectedLanguage } from '../i18n/messages';
-
-const anchors = ['projects', 'studio', 'services', 'contact'];
+import type { Language } from '@i18n/index';
+import m, { common, getSelectedLanguage } from '@i18n/messages';
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const language = getSelectedLanguage();
   const labels = m(common, 'nav');
+  const destinations = [
+    `/${language}/projects`,
+    `/${language}#studio`,
+    `/${language}#services`,
+    `/${language}#contact`,
+  ];
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -56,11 +60,7 @@ export function SiteHeader() {
         aria-label={m(common, 'navLabel')}
       >
         {labels.map((label, index) => (
-          <a
-            key={anchors[index]}
-            href={`/${language}#${anchors[index]}`}
-            onClick={() => setOpen(false)}
-          >
+          <a key={destinations[index]} href={destinations[index]} onClick={() => setOpen(false)}>
             {label}
           </a>
         ))}

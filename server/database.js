@@ -40,6 +40,7 @@ database.exec(`
     problem_en TEXT NOT NULL DEFAULT '',
     concept_en TEXT NOT NULL DEFAULT '',
     solution_en TEXT NOT NULL DEFAULT '',
+    home_order INTEGER,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
@@ -66,6 +67,7 @@ const projectMigrations = {
   problem_en: "TEXT NOT NULL DEFAULT ''",
   concept_en: "TEXT NOT NULL DEFAULT ''",
   solution_en: "TEXT NOT NULL DEFAULT ''",
+  home_order: 'INTEGER',
 };
 for (const [column, definition] of Object.entries(projectMigrations)) {
   if (!projectColumns.some((existing) => existing.name === column)) {
@@ -96,6 +98,21 @@ if (!initialSeed) {
   })();
 }
 
+const unorderedProjects = database
+  .prepare(
+    'SELECT slug FROM projects WHERE home_order IS NULL ORDER BY CAST(year AS INTEGER) DESC, created_at DESC, rowid ASC',
+  )
+  .all();
+if (unorderedProjects.length) {
+  const nextOrder = database
+    .prepare('SELECT COALESCE(MAX(home_order), -1) + 1 AS value FROM projects')
+    .get().value;
+  const setOrder = database.prepare('UPDATE projects SET home_order = ? WHERE slug = ?');
+  database.transaction(() => {
+    unorderedProjects.forEach((project, index) => setOrder.run(nextOrder + index, project.slug));
+  })();
+}
+
 export function rowToProject(row) {
   return {
     slug: row.slug,
@@ -121,6 +138,7 @@ export function rowToProject(row) {
     problemEn: row.problem_en || '',
     conceptEn: row.concept_en || '',
     solutionEn: row.solution_en || '',
+    homeOrder: row.home_order,
   };
 }
 

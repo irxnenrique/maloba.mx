@@ -23,5 +23,6 @@ export interface Project {
   problemEn?: string;
   conceptEn?: string;
   solutionEn?: string;
+  homeOrder?: number;
   isCustom?: boolean;
 }
