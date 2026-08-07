@@ -1,0 +1,55 @@
+{
+  "name": "maloba-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n web,api \"vite\" \"node server/index.js\"",
+    "dev:web": "vite",
+    "dev:api": "node server/index.js",
+    "start": "NODE_ENV=production node server/index.js",
+    "password": "node server/hash-password.js",
+    "build": "tsc --noEmit -p tsconfig.app.json && vite build",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.0.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "express-session": "^1.19.0",
+    "framer-motion": "latest",
+    "helmet": "^8.3.0",
+    "lucide-react": "latest",
+    "multer": "^2.2.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-helmet-async": "latest",
+    "react-router-dom": "^7.11.0",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.19.0",
+    "@types/multer": "^2.2.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "^10.0.4",
+    "eslint": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "globals": "latest",
+    "prettier": "^3.9.6",
+    "typescript": "latest",
+    "typescript-eslint": "latest"
+  }
+}

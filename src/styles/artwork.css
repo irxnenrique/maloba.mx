@@ -1,0 +1,188 @@
+.artwork {
+  --accent: #d9ff45;
+  --secondary: #8668ff;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--accent);
+  isolation: isolate;
+}
+.artwork--wide {
+  aspect-ratio: 16/9;
+}
+.artwork--detail {
+  aspect-ratio: 4/5;
+}
+.art-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+.art-image {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artwork:has(.art-image) .art-shape,
+.artwork:has(.art-image) .art-label {
+  display: none;
+}
+.art-shape {
+  position: absolute;
+  display: block;
+}
+.art-label {
+  position: absolute;
+  z-index: 5;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  line-height: 0.8;
+  left: 6%;
+  bottom: 7%;
+  color: var(--ink);
+}
+.art-index {
+  position: absolute;
+  z-index: 5;
+  right: 5%;
+  top: 5%;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.artwork--orbit {
+  background: linear-gradient(145deg, var(--accent), var(--secondary));
+}
+.artwork--orbit .a,
+.artwork--orbit .b {
+  width: 35%;
+  aspect-ratio: 1;
+  border: 1px solid;
+  border-radius: 50%;
+  top: 16%;
+}
+.artwork--orbit .a {
+  left: 26%;
+}
+.artwork--orbit .b {
+  left: 52%;
+}
+.artwork--orbit .c {
+  width: 8%;
+  aspect-ratio: 1;
+  background: var(--secondary);
+  border-radius: 50%;
+  right: 8%;
+  bottom: 9%;
+}
+.artwork--arch {
+  background: var(--accent);
+}
+.artwork--arch .a {
+  inset: 10% 14% 0;
+  border: 1px solid;
+  border-radius: 50% 50% 0 0;
+  background: var(--secondary);
+}
+.artwork--arch .b {
+  inset: 22% 25% 0;
+  border-radius: 50% 50% 0 0;
+  background: var(--accent);
+}
+.artwork--arch .art-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 4rem;
+}
+.artwork--wave {
+  background: var(--secondary);
+}
+.artwork--wave .a,
+.artwork--wave .b,
+.artwork--wave .c {
+  width: 75%;
+  height: 45%;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  left: 12%;
+}
+.artwork--wave .a {
+  top: -10%;
+}
+.artwork--wave .b {
+  top: 24%;
+}
+.artwork--wave .c {
+  top: 57%;
+  background: var(--accent);
+}
+.artwork--stamp {
+  background: var(--accent);
+  color: var(--secondary);
+}
+.artwork--stamp .a {
+  width: 53%;
+  aspect-ratio: 1;
+  border: 1px solid;
+  border-radius: 50%;
+  top: 13%;
+  left: 24%;
+}
+.artwork--stamp .b {
+  width: 28%;
+  height: 55%;
+  border: 1px solid;
+  transform: rotate(35deg);
+  top: 12%;
+  left: 37%;
+}
+.artwork--stamp .art-label {
+  color: var(--secondary);
+  font-style: italic;
+}
+.artwork--grid {
+  background: var(--secondary);
+  background-image:
+    linear-gradient(var(--accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+  background-size: 9% 12%;
+}
+.artwork--grid .a {
+  width: 48%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  top: 22%;
+  left: 26%;
+  mix-blend-mode: screen;
+}
+.artwork--grid .art-label {
+  color: var(--accent);
+}
+.artwork--type {
+  background: var(--accent);
+}
+.artwork--type::before {
+  content: 'Aa';
+  font-family: var(--serif);
+  font-style: italic;
+  position: absolute;
+  font-size: clamp(12rem, 30vw, 32rem);
+  line-height: 1;
+  color: var(--secondary);
+  left: 5%;
+  top: -12%;
+}
+.artwork--type .a {
+  height: 1px;
+  background: var(--secondary);
+  width: 90%;
+  left: 5%;
+  top: 60%;
+}
