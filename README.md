@@ -22,7 +22,7 @@ npm run preview
 - **Colores, tipografías y espaciado:** edita `src/styles/tokens.css`.
 - **Estilos globales y responsive:** edita `src/styles/global.css`.
 - **Proyectos:** crea y actualiza contenido desde `/admin-maloba`. `src/data/projects.ts` funciona únicamente como respaldo si la API local no está disponible.
-- **Imágenes:** las portadas y galerías subidas desde el gestor se almacenan en `uploads/`. La portada funciona como imagen principal y cada proyecto admite una cantidad abierta de imágenes de galería, limitada únicamente por el espacio disponible. `Artwork.tsx` mantiene las composiciones gráficas para proyectos sin fotografía.
+- **Imágenes:** las portadas y galerías subidas desde el gestor se almacenan en `uploads/`. La portada funciona como imagen principal y cada proyecto admite una cantidad abierta de imágenes de galería, limitada únicamente por el espacio disponible. La galería se puede reordenar arrastrando miniaturas o usando sus flechas; el orden se guarda junto con el proyecto. `Artwork.tsx` mantiene las composiciones gráficas para proyectos sin fotografía.
 - **Contacto:** edita WhatsApp y redes en `src/pages/HomePage.tsx`. El formulario valida el nombre y el mensaje antes de abrir WhatsApp; no envía información automáticamente ni utiliza el servidor.
 - **Textos:** el contenido de inicio vive en `HomePage.tsx`; cada caso se controla desde `projects.ts`.
 

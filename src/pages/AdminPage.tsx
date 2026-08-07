@@ -1,6 +1,16 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent, type ReactNode } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Check, Edit3, ExternalLink, ImagePlus, LogOut, Trash2 } from 'lucide-react';
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Edit3,
+  ExternalLink,
+  GripVertical,
+  ImagePlus,
+  LogOut,
+  Trash2,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Artwork } from '../components/Artwork';
 import {
@@ -122,6 +132,7 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
   const [error, setError] = useState('');
   const [publishedSlug, setPublishedSlug] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [draggedImage, setDraggedImage] = useState<number | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -157,6 +168,17 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
     } finally {
       setUploading(false);
     }
+  }
+
+  function moveGalleryImage(from: number, to: number) {
+    if (from === to || to < 0 || to >= form.galleryImages.length) return;
+    setForm((current) => {
+      const galleryImages = [...current.galleryImages];
+      const [image] = galleryImages.splice(from, 1);
+      galleryImages.splice(to, 0, image);
+      return { ...current, galleryImages };
+    });
+    setPublishedSlug('');
   }
 
   function editProject(project: Project) {
@@ -340,28 +362,68 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
                 />
               </label>
               {form.galleryImages.length > 0 && (
-                <div className="gallery-editor-grid">
-                  {form.galleryImages.map((image, index) => (
-                    <figure key={`${image}-${index}`}>
-                      <img src={image} alt={`Galería ${index + 1}`} />
-                      <figcaption>
-                        <span>{String(index + 1).padStart(2, '0')}</span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            update(
-                              'galleryImages',
-                              form.galleryImages.filter((_, imageIndex) => imageIndex !== index),
-                            )
-                          }
-                          aria-label={`Quitar imagen ${index + 1}`}
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                <>
+                  <p className="gallery-order-note">
+                    Arrastra las imágenes o usa las flechas. Guarda los cambios para conservar el
+                    nuevo orden.
+                  </p>
+                  <div className="gallery-editor-grid">
+                    {form.galleryImages.map((image, index) => (
+                      <figure
+                        key={`${image}-${index}`}
+                        draggable
+                        className={draggedImage === index ? 'is-dragging' : ''}
+                        onDragStart={() => setDraggedImage(index)}
+                        onDragEnd={() => setDraggedImage(null)}
+                        onDragOver={(event) => event.preventDefault()}
+                        onDrop={() => {
+                          if (draggedImage !== null) moveGalleryImage(draggedImage, index);
+                          setDraggedImage(null);
+                        }}
+                      >
+                        <img src={image} alt={`Galería ${index + 1}`} />
+                        <figcaption>
+                          <span>
+                            <GripVertical className="drag-handle" size={15} aria-hidden="true" />
+                            {String(index + 1).padStart(2, '0')}
+                          </span>
+                          <div className="gallery-item-actions">
+                            <button
+                              type="button"
+                              onClick={() => moveGalleryImage(index, index - 1)}
+                              disabled={index === 0}
+                              aria-label={`Mover imagen ${index + 1} hacia el inicio`}
+                            >
+                              <ChevronLeft size={16} />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => moveGalleryImage(index, index + 1)}
+                              disabled={index === form.galleryImages.length - 1}
+                              aria-label={`Mover imagen ${index + 1} hacia el final`}
+                            >
+                              <ChevronRight size={16} />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                update(
+                                  'galleryImages',
+                                  form.galleryImages.filter(
+                                    (_, imageIndex) => imageIndex !== index,
+                                  ),
+                                )
+                              }
+                              aria-label={`Quitar imagen ${index + 1}`}
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           </EditorSection>
@@ -420,6 +482,22 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
           <p>
             {form.category || 'Categoría'} · {form.year}
           </p>
+          <div className="editor-preview-gallery-header">
+            <span>Galería · orden actual</span>
+            <small>{form.galleryImages.length} imágenes</small>
+          </div>
+          {form.galleryImages.length > 0 ? (
+            <div className="editor-preview-gallery" aria-label="Vista previa de la galería">
+              {form.galleryImages.map((image, index) => (
+                <figure key={`${image}-preview-${index}`}>
+                  <img src={image} alt={`Posición ${index + 1} de la galería`} />
+                  <figcaption>{String(index + 1).padStart(2, '0')}</figcaption>
+                </figure>
+              ))}
+            </div>
+          ) : (
+            <p className="editor-preview-empty">Agrega imágenes para visualizar su acomodo.</p>
+          )}
         </aside>
       </section>
 

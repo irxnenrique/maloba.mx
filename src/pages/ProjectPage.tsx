@@ -1,9 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useProjects } from '../hooks/useProjects';
 import { Artwork } from '../components/Artwork';
+import { ImageLightbox } from '../components/ImageLightbox';
 import { Reveal } from '../components/Reveal';
 import { NotFoundPage } from './NotFoundPage';
 export function ProjectPage() {
@@ -11,6 +13,7 @@ export function ProjectPage() {
   const projects = useProjects();
   const project = projects.find((item) => item.slug === slug);
   const reduce = useReducedMotion();
+  const [activeImage, setActiveImage] = useState<number | null>(null);
   if (!project) return <NotFoundPage />;
   const index = projects.indexOf(project),
     prev = projects[(index - 1 + projects.length) % projects.length],
@@ -90,12 +93,19 @@ export function ProjectPage() {
               key={`${image}-${index}`}
               className={`gallery-item gallery-item-${(index % 5) + 1}`}
             >
-              <img
-                src={image}
-                alt={`${project.name}, imagen de galería ${index + 1}`}
-                loading="lazy"
-                decoding="async"
-              />
+              <button
+                className="gallery-image-button"
+                type="button"
+                onClick={() => setActiveImage(index)}
+                aria-label={`Ampliar imagen ${index + 1} de ${project.name}`}
+              >
+                <img
+                  src={image}
+                  alt={`${project.name}, imagen de galería ${index + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
             </Reveal>
           ))
         ) : (
@@ -137,6 +147,13 @@ export function ProjectPage() {
           <ArrowRight />
         </Link>
       </nav>
+      <ImageLightbox
+        images={project.galleryImages ?? []}
+        activeIndex={activeImage}
+        projectName={project.name}
+        onChange={setActiveImage}
+        onClose={() => setActiveImage(null)}
+      />
     </motion.main>
   );
 }
