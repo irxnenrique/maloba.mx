@@ -12,7 +12,7 @@ export function HomeHero() {
       <div className="hero-top">
         <span>Estudio creativo independiente</span>
         <span>
-          CDMX · MX
+          GDL · MX
           <br />
           {currentYear}
         </span>

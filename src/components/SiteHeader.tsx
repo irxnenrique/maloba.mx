@@ -42,7 +42,7 @@ export function SiteHeader() {
         <span className="nav-note">
           Estudio creativo
           <br />
-          Ciudad de México
+          Guadalajara
         </span>
       </nav>
     </header>
