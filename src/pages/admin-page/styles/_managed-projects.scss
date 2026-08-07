@@ -1,0 +1,140 @@
+@use '@app/styles/abstracts/variables' as v;
+
+.managed-projects {
+  padding-top: v.$space-lg;
+  padding-bottom: v.$space-xl;
+  border-top: 1px solid v.$line;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    margin: 0.35rem 0 0;
+    font-family: v.$font-sans;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+  }
+}
+.managed-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.78rem;
+  strong {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  span {
+    margin-top: 0.3rem;
+    opacity: 0.6;
+  }
+}
+.managed-table {
+  &-wrap {
+    overflow-x: auto;
+    border: 1px solid v.$line;
+    background: v.$paper;
+  }
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: v.$font-size-ui;
+  th,
+  td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid v.$line;
+    text-align: left;
+    vertical-align: middle;
+  }
+  th {
+    background: v.$surface-muted;
+    font-size: v.$font-size-caption;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  tbody tr:hover {
+    background: rgb(115 48 255 / 4%);
+  }
+}
+.home-position {
+  display: inline-flex;
+  min-width: 2rem;
+  justify-content: center;
+  padding: 0.28rem 0.42rem;
+  border-radius: 999px;
+  background: v.$surface-muted;
+  font-variant-numeric: tabular-nums;
+  &.is-visible {
+    background: v.$violet;
+    color: v.$paper;
+  }
+}
+.managed-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+.managed-order-actions,
+.managed-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.managed-table button,
+.managed-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 36px;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid v.$line;
+  background: transparent;
+  font-size: v.$font-size-meta;
+}
+.managed-table button:hover,
+.managed-pagination button:hover:not(:disabled) {
+  border-color: v.$violet;
+  color: v.$violet;
+}
+.managed-table {
+  button.is-danger:hover {
+    border-color: v.$danger;
+    color: v.$danger;
+  }
+}
+.managed-table button:disabled,
+.managed-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+.managed-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  font-size: v.$font-size-meta;
+  p {
+    margin: 0;
+    opacity: 0.65;
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  span {
+    min-width: 7.5rem;
+    text-align: center;
+  }
+}

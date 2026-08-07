@@ -1,0 +1,125 @@
+@use '@app/styles/abstracts/variables' as v;
+
+.contact {
+  position: relative;
+  min-height: 100svh;
+  padding: v.$space-lg v.$gutter 1.5rem;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 8vw;
+  align-content: center;
+  overflow: hidden;
+  color: v.$white;
+  > *:not(.contact-glow) {
+    position: relative;
+    z-index: 1;
+  }
+  &-intro > p {
+    font-size: v.$font-size-meta;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  h2 {
+    font-family: v.$font-serif;
+    font-weight: 400;
+    font-size: clamp(3.5rem, 7vw, 7.8rem);
+    line-height: 0.87;
+    letter-spacing: -0.035em;
+    margin: 3rem 0;
+  }
+}
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: v.$font-size-ui;
+  text-transform: uppercase;
+}
+.contact {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 4rem;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    font-size: v.$font-size-meta;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  input,
+  textarea {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid;
+    padding: 0.75rem 0;
+    border-radius: 0;
+    resize: vertical;
+    outline: none;
+    color: v.$white;
+    caret-color: v.$white;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: v.$white;
+  }
+  small {
+    color: v.$white;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 0.35rem;
+  }
+}
+.submit-button {
+  margin-top: 1rem;
+  border: 1px solid;
+  border-radius: 50%;
+  background: v.$violet;
+  color: v.$white;
+  width: 155px;
+  aspect-ratio: 1;
+  align-self: flex-end;
+  transition:
+    background v.$transition-base,
+    color v.$transition-base;
+  &:hover {
+    background: v.$ink;
+    color: white;
+  }
+  span {
+    display: block;
+    font-size: 1.5rem;
+  }
+}
+.whatsapp-note {
+  max-width: 330px;
+  margin: 0;
+  font-size: v.$font-size-label;
+  opacity: 0.7;
+}
+.form-success {
+  font-family: v.$font-serif;
+  font-size: 2.2rem;
+  p {
+    font-family: v.$font-sans;
+    font-size: 1rem;
+  }
+  button {
+    border: 0;
+    border-bottom: 1px solid;
+    background: none;
+    padding: 0.5rem 0;
+  }
+}
+footer {
+  position: absolute !important;
+  bottom: 1.5rem;
+  left: v.$gutter;
+  right: v.$gutter;
+  display: flex;
+  justify-content: space-between;
+  font-size: v.$font-size-label;
+  text-transform: uppercase;
+}

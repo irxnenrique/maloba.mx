@@ -51,6 +51,7 @@
     "eslint-plugin-react-refresh": "latest",
     "globals": "latest",
     "prettier": "^3.9.6",
+    "sass": "^1.102.0",
     "typescript": "latest",
     "typescript-eslint": "latest"
   }

@@ -1,0 +1,107 @@
+@use '@app/styles/abstracts/variables' as v;
+
+.projects-archive {
+  min-height: 100vh;
+  padding-top: clamp(10rem, 16vw, 15rem);
+  padding-bottom: v.$space-xl;
+}
+.archive-header {
+  display: grid;
+  grid-template-columns: 0.4fr 1.6fr;
+  gap: 2rem;
+  align-items: end;
+  padding-bottom: v.$space-xl;
+  h1 {
+    margin: 0;
+    font-family: v.$font-serif;
+    font-size: clamp(4rem, 9vw, 10rem);
+    font-weight: 400;
+    line-height: 0.82;
+    letter-spacing: -0.045em;
+  }
+  h1 em {
+    font-weight: 400;
+  }
+  > p:last-child {
+    grid-column: 2;
+    margin: 1rem 0 0;
+    font-size: v.$font-size-meta;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
+.archive-years {
+  border-top: 1px solid v.$line;
+}
+.archive-year {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.35fr) 1.65fr;
+  gap: clamp(2rem, 6vw, 7rem);
+  padding: v.$space-lg 0;
+  border-bottom: 1px solid v.$line;
+  > h2 {
+    position: sticky;
+    top: 7rem;
+    align-self: start;
+    margin: 0;
+    font-family: v.$font-serif;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.8;
+  }
+}
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 5rem) 1.25rem;
+}
+.archive-card {
+  &:nth-child(even) {
+    margin-top: 5rem;
+  }
+  .artwork {
+    aspect-ratio: 4 / 5;
+  }
+  &-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    h3 {
+      margin: 0;
+      font-family: v.$font-serif;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+    p {
+      margin: 0.2rem 0 0;
+      font-size: v.$font-size-label;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  }
+}
+.archive-load-more {
+  display: grid;
+  place-items: center;
+  width: 180px;
+  aspect-ratio: 1;
+  margin: v.$space-lg auto 0;
+  border: 1px solid;
+  border-radius: 50%;
+  background: v.$violet;
+  color: v.$white;
+  span {
+    display: block;
+    font-size: 1.5rem;
+  }
+}
+.archive-complete,
+.archive-empty {
+  margin: v.$space-lg 0 0;
+  text-align: center;
+  font-size: v.$font-size-meta;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}

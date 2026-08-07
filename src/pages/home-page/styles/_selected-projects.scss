@@ -1,0 +1,88 @@
+@use '@app/styles/abstracts/variables' as v;
+
+.section-heading {
+  padding: v.$space-xl 0 v.$space-lg;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.section-kicker,
+.section-heading > p {
+  font-size: v.$font-size-meta;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.section-heading h2,
+.manifesto h2 {
+  font-family: v.$font-serif;
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(2rem, 5vw, 6rem) 1.25rem;
+  padding-bottom: v.$space-xl;
+}
+.all-projects-link {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 3rem;
+  margin: calc(v.$space-xl * -0.55) 0 v.$space-xl auto;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.project-card {
+  a {
+    display: block;
+  }
+  h3 {
+    font-family: v.$font-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 0;
+  }
+  p {
+    margin: 0.1rem 0 0;
+    font-size: v.$font-size-small;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+}
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 1rem;
+  > span {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: v.$font-size-small;
+  }
+}
+.card-1,
+.card-4,
+.card-5 {
+  grid-column: span 7;
+}
+.card-2,
+.card-3,
+.card-6 {
+  grid-column: span 5;
+}
+.card-2 {
+  margin-top: 10rem;
+}
+.card-3 {
+  margin-top: -4rem;
+}
+.card-6 {
+  margin-top: 9rem;
+}

@@ -19,8 +19,8 @@ npm run preview
 
 ## Personalización
 
-- **Colores, tipografías y espaciado:** edita `src/styles/tokens.css`.
-- **Estilos globales y responsive:** edita `src/styles/global.css`.
+- **Colores, tipografías y espaciado:** edita `src/styles/abstracts/_tokens.scss`.
+- **Estilos:** `src/styles/main.scss` ensambla la base y los componentes compartidos. Cada página mantiene sus estilos exclusivos dentro de su propio directorio `styles/`; por ejemplo, el home usa `src/pages/home-page/styles/`. Los valores reutilizables y mixins viven en `src/styles/abstracts/_variables.scss`. Los módulos emplean nesting de Sass para mantener juntos los elementos, modificadores y estados de cada bloque. Vite compila todo a CSS optimizado durante el build.
 - **Proyectos:** crea y actualiza contenido desde `/admin-maloba`. `src/data/projects.ts` funciona únicamente como respaldo si la API local no está disponible.
 - **Archivo de proyectos:** `/es/projects` y `/en/projects` agrupan todos los casos por año y muestran 10 registros por carga. El home utiliza únicamente los 10 proyectos más recientes devueltos por la base de datos.
 - **Imágenes:** las portadas y galerías subidas desde el gestor se almacenan en `uploads/`. La portada funciona como imagen principal y cada proyecto admite una cantidad abierta de imágenes de galería, limitada únicamente por el espacio disponible. La galería se puede reordenar arrastrando miniaturas o usando sus flechas; el orden se guarda junto con el proyecto. `Artwork.tsx` mantiene las composiciones gráficas para proyectos sin fotografía.

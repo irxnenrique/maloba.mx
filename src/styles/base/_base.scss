@@ -1,0 +1,45 @@
+@use '@app/styles/abstracts/variables' as v;
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: v.$paper;
+  color: v.$ink;
+  font-family: v.$font-sans;
+  font-size: v.$font-size-body;
+  line-height: 1.45;
+  overflow-x: hidden;
+
+  &::selection {
+    background: v.$violet;
+    color: v.$paper;
+  }
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  color: inherit;
+}
+img {
+  max-width: 100%;
+}
+:focus-visible {
+  @include v.focus-ring;
+}
+.section-shell {
+  padding-inline: v.$gutter;
+  max-width: v.$content-max-width;
+  margin-inline: auto;
+}

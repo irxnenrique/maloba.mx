@@ -1,0 +1,141 @@
+@use '@app/styles/abstracts/variables' as v;
+
+.hero {
+  min-height: 100svh;
+  position: relative;
+  padding: 120px v.$gutter 38px;
+  display: grid;
+  align-content: space-between;
+  overflow: hidden;
+  background: #cfedcf;
+  color: v.$white;
+}
+.aurora,
+.contact-glow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.contact {
+  &-glow {
+    background:
+      radial-gradient(circle at 8% 0%, rgba(159, 246, 222, 0.72) 0%, transparent 24%),
+      radial-gradient(circle at 94% 4%, rgba(215, 255, 69, 0.5) 0%, transparent 18%),
+      linear-gradient(145deg, v.$violet 0%, #7338ef 58%, #5522c7 100%);
+  }
+}
+.aurora {
+  background:
+    radial-gradient(circle at 4% 0%, rgba(159, 246, 222, 0.9) 0%, transparent 27%),
+    radial-gradient(circle at 96% 0%, rgba(217, 255, 55, 0.82) 0%, transparent 23%),
+    linear-gradient(145deg, #956dff 0%, v.$violet 42%, #6329dc 100%);
+}
+.aurora::after,
+.contact-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+}
+.aurora {
+  span {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(85px);
+    opacity: 0.68;
+  }
+  span:nth-child(1) {
+    width: 38vw;
+    height: 38vw;
+    background: #abfff2;
+    left: -13vw;
+    top: -12vw;
+  }
+  span:nth-child(2) {
+    width: 35vw;
+    height: 35vw;
+    background: #e8ff00;
+    right: -12vw;
+    top: -12vw;
+  }
+  span:nth-child(3) {
+    width: 85vw;
+    height: 75vw;
+    background: #7438ef;
+    right: -18vw;
+    bottom: -38vw;
+  }
+}
+.hero {
+  > *:not(.aurora) {
+    position: relative;
+    z-index: 1;
+  }
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: v.$font-size-meta;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: v.$ink;
+  }
+  &-top span:last-child {
+    text-align: right;
+  }
+  h1 {
+    font-family: v.$font-serif;
+    font-weight: 400;
+    font-size: clamp(4rem, 9.4vw, 10.5rem);
+    line-height: 0.79;
+    letter-spacing: -0.045em;
+    max-width: 1400px;
+    margin: 7vh 0 10vh;
+  }
+}
+.hero h1 em,
+.section-heading h2 em,
+.manifesto h2 em,
+.contact h2 em,
+.story-row h2 em,
+.not-found em {
+  font-weight: 400;
+}
+.hero {
+  &-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &-bottom p {
+    max-width: 400px;
+    font-size: clamp(1rem, 1.35vw, 1.35rem);
+  }
+  &-bottom a {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid;
+  }
+}
+.orbit-mark {
+  position: absolute !important;
+  right: 10vw;
+  top: 49%;
+  display: flex;
+  span {
+    width: 72px;
+    aspect-ratio: 1;
+    border: 1px solid;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: v.$font-serif;
+    font-size: 1.7rem;
+  }
+  span + span {
+    margin-left: -8px;
+  }
+}

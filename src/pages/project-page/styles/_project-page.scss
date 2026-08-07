@@ -1,0 +1,240 @@
+@use '@app/styles/abstracts/variables' as v;
+
+.case {
+  padding-top: 100px;
+  &-header {
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+  }
+}
+.back-link {
+  display: inline-flex;
+  gap: 0.7rem;
+  align-items: center;
+  font-size: v.$font-size-small;
+  text-transform: uppercase;
+}
+.case {
+  &-header > p {
+    text-transform: uppercase;
+    font-size: v.$font-size-label;
+    letter-spacing: 0.1em;
+    margin-top: 7rem;
+  }
+  &-header h1 {
+    font-family: v.$font-serif;
+    font-size: clamp(4.75rem, 13vw, 13rem);
+    font-weight: 400;
+    line-height: 0.75;
+    letter-spacing: -0.05em;
+    margin: 2rem 0;
+  }
+  &-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12vw;
+    margin-top: 5rem;
+  }
+  &-intro > p {
+    font-family: v.$font-serif;
+    font-size: clamp(1.5rem, 2.35vw, 2.35rem);
+    margin: 0;
+  }
+  &-intro dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 0;
+  }
+  &-intro dt {
+    text-transform: uppercase;
+    font-size: v.$font-size-caption;
+    letter-spacing: 0.1em;
+  }
+  &-intro dd {
+    margin: 0.5rem 0 0;
+  }
+  &-hero {
+    padding-inline: v.$gutter;
+  }
+  &-story {
+    padding-block: v.$space-xl;
+  }
+}
+.story-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10vw;
+  margin: 4rem 0 10rem;
+  h2 {
+    font-family: v.$font-serif;
+    font-weight: 400;
+    font-size: clamp(2.7rem, 5.5vw, 5.5rem);
+    line-height: 0.9;
+    margin: 0;
+  }
+  p {
+    font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+    align-self: end;
+  }
+}
+.story-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid;
+  article {
+    padding: 2rem 4rem 2rem 0;
+  }
+  article + article {
+    border-left: 1px solid;
+    padding-left: 4rem;
+  }
+  span {
+    text-transform: uppercase;
+    font-size: v.$font-size-label;
+    letter-spacing: 0.1em;
+  }
+  h3 {
+    font-family: v.$font-serif;
+    font-size: clamp(1.5rem, 2.25vw, 2.25rem);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+}
+.case {
+  &-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+}
+.gallery-item {
+  min-width: 0;
+  overflow: hidden;
+  background: v.$surface-muted;
+  &:nth-child(5n + 1),
+  &:nth-child(5n + 4) {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+  &:nth-child(5n + 2),
+  &:nth-child(5n + 3),
+  &:nth-child(5n + 5) {
+    aspect-ratio: 4 / 5;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s v.$ease-out;
+  }
+}
+.gallery-image-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  &:focus-visible {
+    outline: 3px solid v.$violet;
+    outline-offset: -3px;
+  }
+}
+.gallery-item {
+  &:hover img {
+    transform: scale(1.015);
+  }
+}
+.image-lightbox {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 3rem);
+  background: rgba(20, 13, 28, 0.96);
+  color: v.$paper;
+  > img {
+    display: block;
+    max-width: min(92vw, 1600px);
+    max-height: calc(100vh - 9rem);
+    object-fit: contain;
+  }
+}
+.lightbox-close,
+.lightbox-controls button {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(243, 239, 231, 0.55);
+  border-radius: 50%;
+  background: v.$violet;
+  color: v.$paper;
+}
+.lightbox-close {
+  position: absolute;
+  top: clamp(1rem, 2vw, 2rem);
+  right: clamp(1rem, 2vw, 2rem);
+  width: 3rem;
+  height: 3rem;
+}
+.lightbox-controls {
+  position: absolute;
+  bottom: clamp(1rem, 2vw, 2rem);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateX(-50%);
+  button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  span {
+    min-width: 4.5rem;
+    text-align: center;
+    font-size: v.$font-size-meta;
+    letter-spacing: 0.1em;
+  }
+}
+.lightbox-close:hover,
+.lightbox-controls button:hover {
+  background: v.$paper;
+  color: v.$violet;
+}
+.solution {
+  padding-block: v.$space-xl;
+  > div p {
+    font-family: v.$font-serif;
+    font-size: clamp(2.4rem, 4.75vw, 5rem);
+    line-height: 0.95;
+    max-width: 1200px;
+  }
+}
+.project-nav {
+  border-top: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  a {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  a:last-child {
+    text-align: right;
+  }
+  span {
+    font-size: v.$font-size-label;
+    text-transform: uppercase;
+  }
+  em {
+    display: block;
+    font-family: v.$font-serif;
+    font-size: 1.7rem;
+    text-transform: none;
+  }
+}
