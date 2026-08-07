@@ -35,9 +35,9 @@
 }
 .archive-year {
   display: grid;
-  grid-template-columns: minmax(120px, 0.35fr) 1.65fr;
-  gap: clamp(2rem, 6vw, 7rem);
-  padding: v.$space-lg 0;
+  grid-template-columns: minmax(90px, 0.2fr) 1.8fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: v.$space-md 0;
   border-bottom: 1px solid v.$line;
   > h2 {
     position: sticky;
@@ -45,33 +45,30 @@
     align-self: start;
     margin: 0;
     font-family: v.$font-serif;
-    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-size: clamp(3rem, 5vw, 5rem);
     font-weight: 400;
     line-height: 0.8;
   }
 }
 .archive-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 5vw, 5rem) 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(2rem, 3.5vw, 3.5rem) 1rem;
 }
 .archive-card {
-  &:nth-child(even) {
-    margin-top: 5rem;
-  }
   .artwork {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
   }
   &-meta {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
-    padding-top: 1rem;
+    padding-top: 0.75rem;
     h3 {
       margin: 0;
       font-family: v.$font-serif;
-      font-size: 2rem;
+      font-size: clamp(1.25rem, 1.6vw, 1.6rem);
       font-weight: 400;
     }
     p {
@@ -80,6 +77,59 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
+  }
+
+  a {
+    display: block;
+  }
+
+  .artwork {
+    transition: transform v.$transition-base v.$ease-out;
+  }
+
+  h3 {
+    transition: color v.$transition-base;
+  }
+
+  a:hover {
+    .artwork {
+      transform: translateY(-4px);
+    }
+
+    h3 {
+      color: v.$violet;
+    }
+  }
+}
+
+@include v.tablet {
+  .archive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@include v.mobile {
+  .archive-header,
+  .archive-year {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-header > p:last-child {
+    grid-column: auto;
+  }
+
+  .archive-year > h2 {
+    position: static;
+  }
+
+  .archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@include v.small-mobile {
+  .archive-grid {
+    grid-template-columns: 1fr;
   }
 }
 .archive-load-more {

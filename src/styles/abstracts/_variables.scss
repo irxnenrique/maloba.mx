@@ -28,6 +28,8 @@ $space-md: clamp(3rem, 7vw, 7rem);
 $space-lg: clamp(5rem, 10vw, 11rem);
 $space-xl: clamp(7rem, 14vw, 15rem);
 $mobile-breakpoint: 800px;
+$tablet-breakpoint: 1100px;
+$small-mobile-breakpoint: 560px;
 
 $transition-fast: 0.2s;
 $transition-base: 0.25s;
@@ -35,6 +37,18 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
 @mixin mobile {
   @media (max-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media (max-width: $small-mobile-breakpoint) {
     @content;
   }
 }

@@ -70,28 +70,6 @@
   .project-card {
     margin: 0 0 4rem !important;
   }
-  .archive-header,
-  .archive-year {
-    grid-template-columns: 1fr;
-  }
-  .archive-header {
-    > p:last-child {
-      grid-column: auto;
-    }
-  }
-  .archive-year {
-    > h2 {
-      position: static;
-    }
-  }
-  .archive-grid {
-    grid-template-columns: 1fr;
-  }
-  .archive-card {
-    &:nth-child(even) {
-      margin-top: 0;
-    }
-  }
   .manifesto-grid,
   .contact,
   .case-intro,
