@@ -128,6 +128,7 @@ img {
   align-content: space-between;
   overflow: hidden;
   background: #cfedcf;
+  color: #fff;
 }
 .aurora,
 .contact-glow {
@@ -193,6 +194,7 @@ img {
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  color: var(--ink);
 }
 .hero-top span:last-child {
   text-align: right;
@@ -374,6 +376,7 @@ img {
   gap: 8vw;
   align-content: center;
   overflow: hidden;
+  color: #fff;
 }
 .contact > *:not(.contact-glow) {
   position: relative;
@@ -421,13 +424,15 @@ img {
   border-radius: 0;
   resize: vertical;
   outline: none;
+  color: #fff;
+  caret-color: #fff;
 }
 .contact input:focus,
 .contact textarea:focus {
-  border-color: var(--violet);
+  border-color: #fff;
 }
 .contact small {
-  color: #671a3a;
+  color: #fff;
   text-transform: none;
   letter-spacing: 0;
   margin-top: 0.35rem;
@@ -437,7 +442,7 @@ img {
   border: 1px solid;
   border-radius: 50%;
   background: var(--violet);
-  color: var(--paper);
+  color: #fff;
   width: 155px;
   aspect-ratio: 1;
   align-self: flex-end;
@@ -1099,6 +1104,20 @@ footer {
   line-height: 1.5;
   opacity: 0.68;
 }
+.bilingual-field-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.bilingual-field-pair h3 {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+}
 .publish-success {
   display: flex;
   align-items: center;
@@ -1326,8 +1345,12 @@ footer {
     order: -1;
   }
   .editor-grid,
-  .visual-controls {
+  .visual-controls,
+  .bilingual-field-pair {
     grid-template-columns: 1fr;
+  }
+  .bilingual-field-pair h3 {
+    grid-column: auto;
   }
   .admin-hero h1 {
     font-size: clamp(4rem, 20vw, 7rem);

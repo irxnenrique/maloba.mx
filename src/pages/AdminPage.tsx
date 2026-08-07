@@ -297,26 +297,71 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
                 onChange={(value) => update('client', value)}
               />
               <Field label="Año" value={form.year} onChange={(value) => update('year', value)} />
-              <Field
-                label="Categoría *"
-                value={form.category}
-                onChange={(value) => update('category', value)}
-              />
             </div>
-            <TextField
-              label="Descripción breve *"
-              value={form.description}
-              onChange={(value) => update('description', value)}
+          </EditorSection>
+
+          <EditorSection title="02 — Contenido en español e inglés">
+            <p className="editor-language-note">
+              Completa ambas versiones en paralelo. El español es obligatorio; si el inglés queda
+              vacío, se mostrará el texto en español como respaldo.
+            </p>
+            <BilingualField
+              title="Categoría"
+              spanishValue={form.category}
+              englishValue={form.categoryEn}
+              onSpanishChange={(value) => update('category', value)}
+              onEnglishChange={(value) => update('categoryEn', value)}
+            />
+            <BilingualField
+              title="Descripción breve"
+              spanishValue={form.description}
+              englishValue={form.descriptionEn}
+              onSpanishChange={(value) => update('description', value)}
+              onEnglishChange={(value) => update('descriptionEn', value)}
               rows={3}
             />
-            <Field
-              label="Servicios separados por comas *"
-              value={form.services}
-              onChange={(value) => update('services', value)}
+            <BilingualField
+              title="Servicios separados por comas"
+              spanishValue={form.services}
+              englishValue={form.servicesEn}
+              onSpanishChange={(value) => update('services', value)}
+              onEnglishChange={(value) => update('servicesEn', value)}
+            />
+            <BilingualField
+              title="Contexto"
+              spanishValue={form.context}
+              englishValue={form.contextEn}
+              onSpanishChange={(value) => update('context', value)}
+              onEnglishChange={(value) => update('contextEn', value)}
+              rows={4}
+            />
+            <BilingualField
+              title="Problema / Challenge"
+              spanishValue={form.problem}
+              englishValue={form.problemEn}
+              onSpanishChange={(value) => update('problem', value)}
+              onEnglishChange={(value) => update('problemEn', value)}
+              rows={4}
+            />
+            <BilingualField
+              title="Concepto creativo"
+              spanishValue={form.concept}
+              englishValue={form.conceptEn}
+              onSpanishChange={(value) => update('concept', value)}
+              onEnglishChange={(value) => update('conceptEn', value)}
+              rows={4}
+            />
+            <BilingualField
+              title="Solución"
+              spanishValue={form.solution}
+              englishValue={form.solutionEn}
+              onSpanishChange={(value) => update('solution', value)}
+              onEnglishChange={(value) => update('solutionEn', value)}
+              rows={4}
             />
           </EditorSection>
 
-          <EditorSection title="02 — Dirección visual">
+          <EditorSection title="03 — Dirección visual">
             <div className="editor-grid visual-controls">
               <label>
                 Color principal
@@ -446,72 +491,6 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
             </div>
           </EditorSection>
 
-          <EditorSection title="03 — Caso de estudio">
-            <TextField
-              label="Contexto *"
-              value={form.context}
-              onChange={(value) => update('context', value)}
-            />
-            <TextField
-              label="Problema *"
-              value={form.problem}
-              onChange={(value) => update('problem', value)}
-            />
-            <TextField
-              label="Concepto creativo *"
-              value={form.concept}
-              onChange={(value) => update('concept', value)}
-            />
-            <TextField
-              label="Solución *"
-              value={form.solution}
-              onChange={(value) => update('solution', value)}
-            />
-          </EditorSection>
-
-          <EditorSection title="04 — Versión en inglés (opcional)">
-            <p className="editor-language-note">
-              Si un campo queda vacío, la página en inglés mostrará temporalmente su versión en
-              español.
-            </p>
-            <Field
-              label="Category"
-              value={form.categoryEn}
-              onChange={(value) => update('categoryEn', value)}
-            />
-            <TextField
-              label="Short description"
-              value={form.descriptionEn}
-              onChange={(value) => update('descriptionEn', value)}
-              rows={3}
-            />
-            <Field
-              label="Services separated by commas"
-              value={form.servicesEn}
-              onChange={(value) => update('servicesEn', value)}
-            />
-            <TextField
-              label="Context"
-              value={form.contextEn}
-              onChange={(value) => update('contextEn', value)}
-            />
-            <TextField
-              label="Challenge"
-              value={form.problemEn}
-              onChange={(value) => update('problemEn', value)}
-            />
-            <TextField
-              label="Creative concept"
-              value={form.conceptEn}
-              onChange={(value) => update('conceptEn', value)}
-            />
-            <TextField
-              label="Solution"
-              value={form.solutionEn}
-              onChange={(value) => update('solutionEn', value)}
-            />
-          </EditorSection>
-
           {error && (
             <p className="editor-error" role="alert">
               {error}
@@ -603,6 +582,45 @@ function EditorSection({ title, children }: { title: string; children: ReactNode
     </div>
   );
 }
+
+function BilingualField({
+  title,
+  spanishValue,
+  englishValue,
+  onSpanishChange,
+  onEnglishChange,
+  rows,
+}: {
+  title: string;
+  spanishValue: string;
+  englishValue: string;
+  onSpanishChange: (value: string) => void;
+  onEnglishChange: (value: string) => void;
+  rows?: number;
+}) {
+  return (
+    <div className="bilingual-field-pair">
+      <h3>{title}</h3>
+      {rows ? (
+        <>
+          <TextField
+            label="Español *"
+            value={spanishValue}
+            onChange={onSpanishChange}
+            rows={rows}
+          />
+          <TextField label="English" value={englishValue} onChange={onEnglishChange} rows={rows} />
+        </>
+      ) : (
+        <>
+          <Field label="Español *" value={spanishValue} onChange={onSpanishChange} />
+          <Field label="English" value={englishValue} onChange={onEnglishChange} />
+        </>
+      )}
+    </div>
+  );
+}
+
 function Field({
   label,
   value,
