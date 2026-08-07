@@ -143,6 +143,15 @@ function normalizeProject(body) {
           .map((item) => String(item))
           .filter((item) => item.startsWith('/uploads/'))
       : [],
+    categoryEn: String(body.categoryEn || '').trim(),
+    descriptionEn: String(body.descriptionEn || '').trim(),
+    servicesEn: Array.isArray(body.servicesEn)
+      ? body.servicesEn.map((item) => String(item).trim()).filter(Boolean)
+      : [],
+    contextEn: String(body.contextEn || '').trim(),
+    problemEn: String(body.problemEn || '').trim(),
+    conceptEn: String(body.conceptEn || '').trim(),
+    solutionEn: String(body.solutionEn || '').trim(),
   };
 }
 
@@ -154,22 +163,29 @@ app.put('/api/admin/projects/:slug', requireAdmin, requireAdminHeader, (request,
     .prepare(
       `INSERT INTO projects (
     slug, name, client, year, category, description, services, accent, secondary, artwork,
-    context, problem, concept, solution, cover_image, gallery_images
+    context, problem, concept, solution, cover_image, gallery_images, category_en,
+    description_en, services_en, context_en, problem_en, concept_en, solution_en
   ) VALUES (
     @slug, @name, @client, @year, @category, @description, @services, @accent, @secondary,
-    @artwork, @context, @problem, @concept, @solution, @coverImage, @galleryImages
+    @artwork, @context, @problem, @concept, @solution, @coverImage, @galleryImages,
+    @categoryEn, @descriptionEn, @servicesEn, @contextEn, @problemEn, @conceptEn, @solutionEn
   ) ON CONFLICT(slug) DO UPDATE SET
     name=excluded.name, client=excluded.client, year=excluded.year, category=excluded.category,
     description=excluded.description, services=excluded.services, accent=excluded.accent,
     secondary=excluded.secondary, artwork=excluded.artwork, context=excluded.context,
     problem=excluded.problem, concept=excluded.concept, solution=excluded.solution,
     cover_image=excluded.cover_image, gallery_images=excluded.gallery_images,
+    category_en=excluded.category_en, description_en=excluded.description_en,
+    services_en=excluded.services_en, context_en=excluded.context_en,
+    problem_en=excluded.problem_en, concept_en=excluded.concept_en,
+    solution_en=excluded.solution_en,
     updated_at=CURRENT_TIMESTAMP`,
     )
     .run({
       ...project,
       services: JSON.stringify(project.services),
       galleryImages: JSON.stringify(project.galleryImages),
+      servicesEn: JSON.stringify(project.servicesEn),
     });
   response.json(project);
 });

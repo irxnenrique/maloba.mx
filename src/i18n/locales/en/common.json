@@ -1,0 +1,14 @@
+{
+  "nav": ["Projects", "Studio", "Services", "Contact"],
+  "navLabel": "Main navigation",
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+  "changeLanguage": "Change language",
+  "homeLabel": "maloba, home",
+  "studio": "Creative studio",
+  "city": "Guadalajara",
+  "viewProject": "View project",
+  "seoTitle": "maloba® — Branding and visual identity",
+  "seoDescription": "Independent creative studio specializing in brand strategy, branding, visual identity and art direction.",
+  "ogTitle": "maloba® — Creative studio"
+}

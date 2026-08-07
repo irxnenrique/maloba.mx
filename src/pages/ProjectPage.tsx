@@ -8,16 +8,20 @@ import { Artwork } from '../components/Artwork';
 import { ImageLightbox } from '../components/ImageLightbox';
 import { Reveal } from '../components/Reveal';
 import { NotFoundPage } from './NotFoundPage';
+import { localizeProject } from '../i18n/projects';
+import m, { caseStudy, getSelectedLanguage } from '../i18n/messages';
 export function ProjectPage() {
+  const language = getSelectedLanguage();
   const { slug } = useParams();
   const projects = useProjects();
-  const project = projects.find((item) => item.slug === slug);
+  const sourceProject = projects.find((item) => item.slug === slug);
   const reduce = useReducedMotion();
   const [activeImage, setActiveImage] = useState<number | null>(null);
-  if (!project) return <NotFoundPage />;
-  const index = projects.indexOf(project),
-    prev = projects[(index - 1 + projects.length) % projects.length],
-    next = projects[(index + 1) % projects.length];
+  if (!sourceProject) return <NotFoundPage />;
+  const project = localizeProject(sourceProject, language);
+  const index = projects.indexOf(sourceProject),
+    prev = localizeProject(projects[(index - 1 + projects.length) % projects.length], language),
+    next = localizeProject(projects[(index + 1) % projects.length], language);
   return (
     <motion.main
       className="case"
@@ -26,12 +30,15 @@ export function ProjectPage() {
       exit={reduce ? {} : { opacity: 0 }}
     >
       <Helmet>
+        <html lang={language} />
         <title>{project.name} — maloba®</title>
         <meta name="description" content={project.description} />
+        <link rel="alternate" hrefLang="es" href={`/es/projects/${project.slug}`} />
+        <link rel="alternate" hrefLang="en" href={`/en/projects/${project.slug}`} />
       </Helmet>
       <header className="case-header section-shell">
-        <Link to="/#projects" className="back-link">
-          <ArrowLeft /> Volver al portafolio
+        <Link to={`/${language}#projects`} className="back-link">
+          <ArrowLeft /> {m(caseStudy, 'back')}
         </Link>
         <p>
           {project.category} · {project.year}
@@ -41,11 +48,11 @@ export function ProjectPage() {
           <p>{project.description}</p>
           <dl>
             <div>
-              <dt>Cliente</dt>
+              <dt>{m(caseStudy, 'client')}</dt>
               <dd>{project.client}</dd>
             </div>
             <div>
-              <dt>Servicios</dt>
+              <dt>{m(caseStudy, 'services')}</dt>
               <dd>{project.services.join(', ')}</dd>
             </div>
           </dl>
@@ -63,12 +70,12 @@ export function ProjectPage() {
       </div>
       <section className="case-story section-shell">
         <Reveal>
-          <p className="section-kicker">01 — Contexto</p>
+          <p className="section-kicker">{m(caseStudy, 'contextKicker')}</p>
           <div className="story-row">
             <h2>
-              El punto
+              {m(caseStudy, 'contextTitle')}
               <br />
-              <em>de partida.</em>
+              <em>{m(caseStudy, 'contextEmphasis')}</em>
             </h2>
             <p>{project.context}</p>
           </div>
@@ -76,11 +83,11 @@ export function ProjectPage() {
         <Reveal>
           <div className="story-pair">
             <article>
-              <span>El problema</span>
+              <span>{m(caseStudy, 'problem')}</span>
               <h3>{project.problem}</h3>
             </article>
             <article>
-              <span>El concepto</span>
+              <span>{m(caseStudy, 'concept')}</span>
               <h3>{project.concept}</h3>
             </article>
           </div>
@@ -97,11 +104,11 @@ export function ProjectPage() {
                 className="gallery-image-button"
                 type="button"
                 onClick={() => setActiveImage(index)}
-                aria-label={`Ampliar imagen ${index + 1} de ${project.name}`}
+                aria-label={`${m(caseStudy, 'enlarge')} ${index + 1} — ${project.name}`}
               >
                 <img
                   src={image}
-                  alt={`${project.name}, imagen de galería ${index + 1}`}
+                  alt={`${project.name}, ${m(caseStudy, 'galleryImage')} ${index + 1}`}
                   loading="lazy"
                   decoding="async"
                 />
@@ -128,21 +135,23 @@ export function ProjectPage() {
         )}
       </section>
       <section className="solution section-shell">
-        <p className="section-kicker">02 — La solución</p>
+        <p className="section-kicker">{m(caseStudy, 'solution')}</p>
         <Reveal>
           <p>{project.solution}</p>
         </Reveal>
       </section>
-      <nav className="project-nav section-shell" aria-label="Otros proyectos">
-        <Link to={`/projects/${prev.slug}`}>
+      <nav className="project-nav section-shell" aria-label={m(caseStudy, 'otherProjects')}>
+        <Link to={`/${language}/projects/${prev.slug}`}>
           <ArrowLeft />
           <span>
-            Anterior<em>{prev.name}</em>
+            {m(caseStudy, 'previous')}
+            <em>{prev.name}</em>
           </span>
         </Link>
-        <Link to={`/projects/${next.slug}`}>
+        <Link to={`/${language}/projects/${next.slug}`}>
           <span>
-            Siguiente<em>{next.name}</em>
+            {m(caseStudy, 'next')}
+            <em>{next.name}</em>
           </span>
           <ArrowRight />
         </Link>

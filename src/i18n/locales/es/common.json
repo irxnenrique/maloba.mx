@@ -1,0 +1,14 @@
+{
+  "nav": ["Proyectos", "Estudio", "Servicios", "Contacto"],
+  "navLabel": "Navegación principal",
+  "openMenu": "Abrir menú",
+  "closeMenu": "Cerrar menú",
+  "changeLanguage": "Cambiar idioma",
+  "homeLabel": "maloba, inicio",
+  "studio": "Estudio creativo",
+  "city": "Guadalajara",
+  "viewProject": "Ver proyecto",
+  "seoTitle": "maloba® — Branding e identidad visual",
+  "seoDescription": "Estudio creativo independiente especializado en estrategia de marca, branding, identidad visual y dirección de arte.",
+  "ogTitle": "maloba® — Estudio creativo"
+}

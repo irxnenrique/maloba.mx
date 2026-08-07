@@ -1,0 +1,21 @@
+{
+  "back": "Volver al portafolio",
+  "client": "Cliente",
+  "services": "Servicios",
+  "contextKicker": "01 — Contexto",
+  "contextTitle": "El punto",
+  "contextEmphasis": "de partida.",
+  "problem": "El problema",
+  "concept": "El concepto",
+  "solution": "02 — La solución",
+  "previous": "Anterior",
+  "next": "Siguiente",
+  "otherProjects": "Otros proyectos",
+  "enlarge": "Ampliar imagen",
+  "galleryImage": "imagen de galería",
+  "expandedGallery": "Galería ampliada de {{project}}",
+  "closeImage": "Cerrar imagen ampliada",
+  "imageAlt": "{{project}}, imagen {{current}} de {{total}}",
+  "previousImage": "Ver imagen anterior",
+  "nextImage": "Ver imagen siguiente"
+}

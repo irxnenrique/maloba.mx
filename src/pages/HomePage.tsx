@@ -6,10 +6,12 @@ import { HomeHero } from '../sections/HomeHero';
 import { SelectedProjects } from '../sections/SelectedProjects';
 import { ServicesSection } from '../sections/ServicesSection';
 import { StudioManifesto } from '../sections/StudioManifesto';
+import m, { common, getSelectedLanguage, hero } from '../i18n/messages';
 
 export function HomePage() {
   const reduce = useReducedMotion();
   const projects = useProjects();
+  const language = getSelectedLanguage();
 
   return (
     <motion.main
@@ -19,17 +21,15 @@ export function HomePage() {
       transition={{ duration: 0.35 }}
     >
       <Helmet>
-        <title>maloba® — Branding e identidad visual</title>
-        <meta
-          name="description"
-          content="Estudio creativo independiente especializado en estrategia de marca, branding, identidad visual y dirección de arte."
-        />
-        <meta property="og:title" content="maloba® — Estudio creativo" />
-        <meta
-          property="og:description"
-          content="Creamos identidades visuales para marcas que quieren ser recordadas."
-        />
+        <html lang={language} />
+        <title>{m(common, 'seoTitle')}</title>
+        <meta name="description" content={m(common, 'seoDescription')} />
+        <meta property="og:title" content={m(common, 'ogTitle')} />
+        <meta property="og:description" content={`${m(hero, 'headline')} ${m(hero, 'emphasis')}`} />
         <meta property="og:type" content="website" />
+        <link rel="alternate" hrefLang="es" href="/es" />
+        <link rel="alternate" hrefLang="en" href="/en" />
+        <link rel="alternate" hrefLang="x-default" href="/es" />
       </Helmet>
 
       <HomeHero />

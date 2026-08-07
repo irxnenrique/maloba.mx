@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import m, { caseStudy } from '../i18n/messages';
 
 type ImageLightboxProps = {
   images: string[];
@@ -52,7 +53,7 @@ export function ImageLightbox({
           className="image-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`Galería ampliada de ${projectName}`}
+          aria-label={m(caseStudy, 'expandedGallery', { project: projectName })}
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={reduce ? {} : { opacity: 0 }}
@@ -65,7 +66,7 @@ export function ImageLightbox({
             className="lightbox-close"
             type="button"
             onClick={onClose}
-            aria-label="Cerrar imagen ampliada"
+            aria-label={m(caseStudy, 'closeImage')}
           >
             <X />
           </button>
@@ -73,7 +74,11 @@ export function ImageLightbox({
           <motion.img
             key={images[activeIndex]}
             src={images[activeIndex]}
-            alt={`${projectName}, imagen ${activeIndex + 1} de ${images.length}`}
+            alt={m(caseStudy, 'imageAlt', {
+              project: projectName,
+              current: activeIndex + 1,
+              total: images.length,
+            })}
             initial={reduce ? false : { opacity: 0, scale: 0.985 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25 }}
@@ -83,7 +88,7 @@ export function ImageLightbox({
             <button
               type="button"
               onClick={() => onChange((activeIndex - 1 + images.length) % images.length)}
-              aria-label="Ver imagen anterior"
+              aria-label={m(caseStudy, 'previousImage')}
             >
               <ArrowLeft />
             </button>
@@ -93,7 +98,7 @@ export function ImageLightbox({
             <button
               type="button"
               onClick={() => onChange((activeIndex + 1) % images.length)}
-              aria-label="Ver imagen siguiente"
+              aria-label={m(caseStudy, 'nextImage')}
             >
               <ArrowRight />
             </button>

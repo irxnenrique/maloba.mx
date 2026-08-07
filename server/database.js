@@ -33,6 +33,13 @@ database.exec(`
     solution TEXT NOT NULL,
     cover_image TEXT,
     gallery_images TEXT NOT NULL DEFAULT '[]',
+    category_en TEXT NOT NULL DEFAULT '',
+    description_en TEXT NOT NULL DEFAULT '',
+    services_en TEXT NOT NULL DEFAULT '[]',
+    context_en TEXT NOT NULL DEFAULT '',
+    problem_en TEXT NOT NULL DEFAULT '',
+    concept_en TEXT NOT NULL DEFAULT '',
+    solution_en TEXT NOT NULL DEFAULT '',
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
@@ -50,10 +57,20 @@ database.exec(`
 `);
 
 const projectColumns = database.prepare('PRAGMA table_info(projects)').all();
-if (!projectColumns.some((column) => column.name === 'gallery_images')) {
-  database
-    .prepare("ALTER TABLE projects ADD COLUMN gallery_images TEXT NOT NULL DEFAULT '[]'")
-    .run();
+const projectMigrations = {
+  gallery_images: "TEXT NOT NULL DEFAULT '[]'",
+  category_en: "TEXT NOT NULL DEFAULT ''",
+  description_en: "TEXT NOT NULL DEFAULT ''",
+  services_en: "TEXT NOT NULL DEFAULT '[]'",
+  context_en: "TEXT NOT NULL DEFAULT ''",
+  problem_en: "TEXT NOT NULL DEFAULT ''",
+  concept_en: "TEXT NOT NULL DEFAULT ''",
+  solution_en: "TEXT NOT NULL DEFAULT ''",
+};
+for (const [column, definition] of Object.entries(projectMigrations)) {
+  if (!projectColumns.some((existing) => existing.name === column)) {
+    database.prepare(`ALTER TABLE projects ADD COLUMN ${column} ${definition}`).run();
+  }
 }
 
 const insertSeed = database.prepare(`
@@ -97,6 +114,13 @@ export function rowToProject(row) {
     solution: row.solution,
     coverImage: row.cover_image || undefined,
     galleryImages: JSON.parse(row.gallery_images || '[]'),
+    categoryEn: row.category_en || '',
+    descriptionEn: row.description_en || '',
+    servicesEn: JSON.parse(row.services_en || '[]'),
+    contextEn: row.context_en || '',
+    problemEn: row.problem_en || '',
+    conceptEn: row.concept_en || '',
+    solutionEn: row.solution_en || '',
   };
 }
 

@@ -16,5 +16,12 @@ export interface Project {
   solution: string;
   coverImage?: string;
   galleryImages?: string[];
+  categoryEn?: string;
+  descriptionEn?: string;
+  servicesEn?: string[];
+  contextEn?: string;
+  problemEn?: string;
+  conceptEn?: string;
+  solutionEn?: string;
   isCustom?: boolean;
 }

@@ -1,0 +1,21 @@
+{
+  "back": "Back to portfolio",
+  "client": "Client",
+  "services": "Services",
+  "contextKicker": "01 — Context",
+  "contextTitle": "The starting",
+  "contextEmphasis": "point.",
+  "problem": "The challenge",
+  "concept": "The concept",
+  "solution": "02 — The solution",
+  "previous": "Previous",
+  "next": "Next",
+  "otherProjects": "Other projects",
+  "enlarge": "Enlarge image",
+  "galleryImage": "gallery image",
+  "expandedGallery": "Expanded gallery for {{project}}",
+  "closeImage": "Close enlarged image",
+  "imageAlt": "{{project}}, image {{current}} of {{total}}",
+  "previousImage": "View previous image",
+  "nextImage": "View next image"
+}

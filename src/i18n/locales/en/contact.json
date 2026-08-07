@@ -1,0 +1,15 @@
+{
+  "kicker": "04 — Let’s start something",
+  "title": "Do you have a brand, an idea or a project in the making?",
+  "emphasis": "Let’s talk.",
+  "identityLine": "Identities made to be remembered.",
+  "whatsappLabel": "Send maloba a message on WhatsApp",
+  "name": "Name",
+  "message": "Message",
+  "nameError": "Please enter your name.",
+  "messageError": "Tell me a little more (at least 12 characters).",
+  "submit": "Continue on WhatsApp",
+  "note": "WhatsApp will open with your message ready to send. Nothing will be sent automatically.",
+  "whatsappIntro": "💜 Hi, maloba! I'm {{name}} and I'd love to tell you about a project I'm working on:",
+  "whatsappClosing": "I'd love to talk about it with you. Thank you! 💜"
+}

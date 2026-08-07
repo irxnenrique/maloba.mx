@@ -36,6 +36,13 @@ const blankForm = {
   problem: '',
   concept: '',
   solution: '',
+  categoryEn: '',
+  descriptionEn: '',
+  servicesEn: '',
+  contextEn: '',
+  problemEn: '',
+  conceptEn: '',
+  solutionEn: '',
   coverImage: '',
   galleryImages: [] as string[],
 };
@@ -196,6 +203,13 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
       problem: project.problem,
       concept: project.concept,
       solution: project.solution,
+      categoryEn: project.categoryEn || '',
+      descriptionEn: project.descriptionEn || '',
+      servicesEn: project.servicesEn?.join(', ') || '',
+      contextEn: project.contextEn || '',
+      problemEn: project.problemEn || '',
+      conceptEn: project.conceptEn || '',
+      solutionEn: project.solutionEn || '',
       coverImage: project.coverImage || '',
       galleryImages: project.galleryImages || [],
     });
@@ -227,6 +241,10 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
         ...form,
         slug,
         services: form.services
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean),
+        servicesEn: form.servicesEn
           .split(',')
           .map((item) => item.trim())
           .filter(Boolean),
@@ -451,6 +469,49 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
             />
           </EditorSection>
 
+          <EditorSection title="04 — Versión en inglés (opcional)">
+            <p className="editor-language-note">
+              Si un campo queda vacío, la página en inglés mostrará temporalmente su versión en
+              español.
+            </p>
+            <Field
+              label="Category"
+              value={form.categoryEn}
+              onChange={(value) => update('categoryEn', value)}
+            />
+            <TextField
+              label="Short description"
+              value={form.descriptionEn}
+              onChange={(value) => update('descriptionEn', value)}
+              rows={3}
+            />
+            <Field
+              label="Services separated by commas"
+              value={form.servicesEn}
+              onChange={(value) => update('servicesEn', value)}
+            />
+            <TextField
+              label="Context"
+              value={form.contextEn}
+              onChange={(value) => update('contextEn', value)}
+            />
+            <TextField
+              label="Challenge"
+              value={form.problemEn}
+              onChange={(value) => update('problemEn', value)}
+            />
+            <TextField
+              label="Creative concept"
+              value={form.conceptEn}
+              onChange={(value) => update('conceptEn', value)}
+            />
+            <TextField
+              label="Solution"
+              value={form.solutionEn}
+              onChange={(value) => update('solutionEn', value)}
+            />
+          </EditorSection>
+
           {error && (
             <p className="editor-error" role="alert">
               {error}
@@ -459,7 +520,7 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
           {publishedSlug && (
             <div className="publish-success" role="status">
               <Check /> Proyecto guardado.
-              <Link to={`/projects/${publishedSlug}`}>
+              <Link to={`/es/projects/${publishedSlug}`}>
                 Ver proyecto <ExternalLink size={16} />
               </Link>
             </div>
@@ -509,7 +570,7 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
         <div className="managed-list">
           {projects.map((project) => (
             <article key={project.slug}>
-              <Link to={`/projects/${project.slug}`}>
+              <Link to={`/es/projects/${project.slug}`}>
                 <span>{project.year}</span>
                 <h3>{project.name}</h3>
                 <ExternalLink size={18} />

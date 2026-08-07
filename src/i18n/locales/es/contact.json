@@ -1,0 +1,15 @@
+{
+  "kicker": "04 — Empecemos algo",
+  "title": "¿Tienes una marca, una idea o un proyecto en construcción?",
+  "emphasis": "Hablemos.",
+  "identityLine": "Identidades para recordar.",
+  "whatsappLabel": "Enviar mensaje a maloba por WhatsApp",
+  "name": "Nombre",
+  "message": "Mensaje",
+  "nameError": "Escribe tu nombre.",
+  "messageError": "Cuéntanos un poco más (mínimo 12 caracteres).",
+  "submit": "Continuar en WhatsApp",
+  "note": "Al continuar se abrirá WhatsApp con tu mensaje listo para enviar. Nada se enviará automáticamente.",
+  "whatsappIntro": "💜 ¡Hola, maloba! Soy {{name}} y me gustaría contarte sobre un proyecto en el que estoy trabajando:",
+  "whatsappClosing": "Me encantaría platicarlo contigo. ¡Gracias! 💜"
+}

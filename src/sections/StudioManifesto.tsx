@@ -1,25 +1,20 @@
 import { Reveal } from '../components/Reveal';
+import m, { studio } from '../i18n/messages';
 
 export function StudioManifesto() {
   return (
     <section className="manifesto section-shell" id="studio">
       <Reveal>
-        <p className="section-kicker">02 — El estudio</p>
+        <p className="section-kicker">{m(studio, 'kicker')}</p>
         <div className="manifesto-grid">
           <h2>
-            Diseñar es encontrar
+            {m(studio, 'title')}
             <br />
-            la forma <em>precisa.</em>
+            <em>{m(studio, 'emphasis')}</em>
           </h2>
           <div>
-            <p>
-              Somos un estudio independiente enfocado en identidad, dirección visual y sistemas de
-              marca. Creamos conceptos claros, memorables y capaces de crecer con cada proyecto.
-            </p>
-            <p className="aside">
-              Trabajamos de cerca con equipos pequeños, proyectos culturales y marcas en
-              transformación.
-            </p>
+            <p>{m(studio, 'manifesto')}</p>
+            <p className="aside">{m(studio, 'aside')}</p>
           </div>
         </div>
       </Reveal>

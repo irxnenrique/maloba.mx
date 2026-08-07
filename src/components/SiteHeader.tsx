@@ -1,30 +1,51 @@
-import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
-const links = [
-  ['Proyectos', '/#projects'],
-  ['Estudio', '/#studio'],
-  ['Servicios', '/#services'],
-  ['Contacto', '/#contact'],
-];
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import type { Language } from '../i18n';
+import m, { common, getSelectedLanguage } from '../i18n/messages';
+
+const anchors = ['projects', 'studio', 'services', 'contact'];
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const language = getSelectedLanguage();
+  const labels = m(common, 'nav');
+
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  function languagePath(nextLanguage: Language) {
+    const localizedPath = location.pathname.replace(/^\/(es|en)/, `/${nextLanguage}`);
+    return localizedPath === location.pathname && !/^\/(es|en)/.test(location.pathname)
+      ? `/${nextLanguage}`
+      : localizedPath;
+  }
+
+  function currentLanguage(languageOption: Language) {
+    if (language === languageOption) return 'page' as const;
+    return undefined;
+  }
+
   return (
     <header className="site-header">
-      <Link to="/" className="brand" aria-label="maloba, inicio" onClick={() => setOpen(false)}>
+      <Link
+        to={`/${language}`}
+        className="brand"
+        aria-label={m(common, 'homeLabel')}
+        onClick={() => setOpen(false)}
+      >
         maloba<span>®</span>
       </Link>
       <button
         className="menu-button"
         aria-expanded={open}
         aria-controls="main-navigation"
-        aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+        aria-label={m(common, open ? 'closeMenu' : 'openMenu')}
         onClick={() => setOpen(!open)}
       >
         {open ? <X /> : <Menu />}
@@ -32,17 +53,38 @@ export function SiteHeader() {
       <nav
         id="main-navigation"
         className={open ? 'nav open' : 'nav'}
-        aria-label="Navegación principal"
+        aria-label={m(common, 'navLabel')}
       >
-        {links.map(([label, href]) => (
-          <a key={href} href={href} onClick={() => setOpen(false)}>
+        {labels.map((label, index) => (
+          <a
+            key={anchors[index]}
+            href={`/${language}#${anchors[index]}`}
+            onClick={() => setOpen(false)}
+          >
             {label}
           </a>
         ))}
+        <div className="language-switcher" aria-label={m(common, 'changeLanguage')}>
+          <Link
+            to={`${languagePath('es')}${location.hash}`}
+            aria-current={currentLanguage('es')}
+            onClick={() => setOpen(false)}
+          >
+            ES
+          </Link>
+          <span aria-hidden="true">/</span>
+          <Link
+            to={`${languagePath('en')}${location.hash}`}
+            aria-current={currentLanguage('en')}
+            onClick={() => setOpen(false)}
+          >
+            EN
+          </Link>
+        </div>
         <span className="nav-note">
-          Estudio creativo
+          {m(common, 'studio')}
           <br />
-          Guadalajara
+          {m(common, 'city')}
         </span>
       </nav>
     </header>
