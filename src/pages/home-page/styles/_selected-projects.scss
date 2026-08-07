@@ -39,6 +39,30 @@
   letter-spacing: 0.08em;
 }
 .project-card {
+  &:nth-child(6n + 1),
+  &:nth-child(6n + 4),
+  &:nth-child(6n + 5) {
+    grid-column: span 7;
+  }
+
+  &:nth-child(6n + 2),
+  &:nth-child(6n + 3),
+  &:nth-child(6n + 6) {
+    grid-column: span 5;
+  }
+
+  &:nth-child(6n + 2) {
+    margin-top: 10rem;
+  }
+
+  &:nth-child(6n + 3) {
+    margin-top: -4rem;
+  }
+
+  &:nth-child(6n + 6) {
+    margin-top: 9rem;
+  }
+
   a {
     display: block;
   }
@@ -66,23 +90,4 @@
     align-items: center;
     font-size: v.$font-size-small;
   }
-}
-.card-1,
-.card-4,
-.card-5 {
-  grid-column: span 7;
-}
-.card-2,
-.card-3,
-.card-6 {
-  grid-column: span 5;
-}
-.card-2 {
-  margin-top: 10rem;
-}
-.card-3 {
-  margin-top: -4rem;
-}
-.card-6 {
-  margin-top: 9rem;
 }

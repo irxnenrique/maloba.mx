@@ -22,12 +22,8 @@ export function SelectedProjects({ projects }: SelectedProjectsProps) {
         </h2>
       </Reveal>
       <div className="project-grid">
-        {projects.slice(0, 10).map((project, index) => (
-          <ProjectCard
-            key={project.slug}
-            project={localizeProject(project, language)}
-            index={index}
-          />
+        {projects.slice(0, 10).map((project) => (
+          <ProjectCard key={project.slug} project={localizeProject(project, language)} />
         ))}
       </div>
       <Link className="all-projects-link" to={`/${language}/projects`}>

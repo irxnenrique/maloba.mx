@@ -4,12 +4,12 @@ import { motion, useReducedMotion } from 'framer-motion';
 import type { Project } from '@app-types/project';
 import { Artwork } from '@components/artwork';
 import m, { common, getSelectedLanguage } from '@i18n/messages';
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({ project }: { project: Project }) {
   const reduce = useReducedMotion();
   const language = getSelectedLanguage();
   return (
     <motion.article
-      className={`project-card card-${index + 1}`}
+      className="project-card"
       whileHover={reduce ? {} : { y: -6 }}
       transition={{ duration: 0.25 }}
     >
