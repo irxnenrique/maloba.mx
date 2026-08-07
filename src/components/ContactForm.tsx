@@ -1,34 +1,31 @@
 import { useState, type FormEvent } from 'react';
-type Fields = { name: string; email: string; message: string };
-const empty = { name: '', email: '', message: '' };
+type Fields = { name: string; message: string };
+const empty = { name: '', message: '' };
+const whatsappNumber = '523329292250';
 export function ContactForm() {
   const [fields, setFields] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Partial<Fields>>({});
-  const [sent, setSent] = useState(false);
   function submit(e: FormEvent) {
     e.preventDefault();
     const next: Partial<Fields> = {};
     if (!fields.name.trim()) next.name = 'Escribe tu nombre.';
-    if (!/^\S+@\S+\.\S+$/.test(fields.email)) next.email = 'Escribe un correo válido.';
     if (fields.message.trim().length < 12)
       next.message = 'Cuéntanos un poco más (mínimo 12 caracteres).';
     setErrors(next);
     if (!Object.keys(next).length) {
-      setSent(true);
-      setFields(empty);
+      const purpleHeart = '\u{1F49C}';
+      const initialMessage = [
+        `${purpleHeart} ¡Hola, maloba! Soy ${fields.name.trim()} y me gustaría contarte sobre un proyecto en el que estoy trabajando:`,
+        '',
+        fields.message.trim(),
+        '',
+        `Me encantaría platicarlo contigo. ¡Gracias! ${purpleHeart}`,
+      ].join('\n');
+      const encodedMessage = encodeURIComponent(initialMessage);
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
   }
-  if (sent)
-    return (
-      <div className="form-success" role="status">
-        <span>Mensaje listo</span>
-        <p>
-          Gracias por escribirnos. Esta es una demo; conectaremos el envío cuando definas tu
-          proveedor de correo.
-        </p>
-        <button onClick={() => setSent(false)}>Enviar otro mensaje</button>
-      </div>
-    );
   return (
     <form onSubmit={submit} noValidate>
       <label>
@@ -41,16 +38,6 @@ export function ContactForm() {
         {errors.name && <small>{errors.name}</small>}
       </label>
       <label>
-        Correo
-        <input
-          type="email"
-          value={fields.email}
-          onChange={(e) => setFields({ ...fields, email: e.target.value })}
-          aria-invalid={!!errors.email}
-        />
-        {errors.email && <small>{errors.email}</small>}
-      </label>
-      <label>
         Mensaje
         <textarea
           rows={4}
@@ -61,8 +48,12 @@ export function ContactForm() {
         {errors.message && <small>{errors.message}</small>}
       </label>
       <button className="submit-button" type="submit">
-        Enviar mensaje <span>↗</span>
+        Continuar en WhatsApp <span>↗</span>
       </button>
+      <p className="whatsapp-note">
+        Al continuar se abrirá WhatsApp con tu mensaje listo para enviar. Nada se enviará
+        automáticamente.
+      </p>
     </form>
   );
 }

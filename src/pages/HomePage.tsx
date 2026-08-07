@@ -25,12 +25,12 @@ export function HomePage() {
       transition={{ duration: 0.35 }}
     >
       <Helmet>
-        <title>Maloba® — Branding e identidad visual</title>
+        <title>maloba® — Branding e identidad visual</title>
         <meta
           name="description"
           content="Estudio creativo independiente especializado en estrategia de marca, branding, identidad visual y dirección de arte."
         />
-        <meta property="og:title" content="Maloba® — Estudio creativo" />
+        <meta property="og:title" content="maloba® — Estudio creativo" />
         <meta
           property="og:description"
           content="Creamos identidades visuales para marcas que quieren ser recordadas."
@@ -126,12 +126,16 @@ export function HomePage() {
             ¿Tienes una marca, una idea o un proyecto en construcción? <em>Hablemos.</em>
           </h2>
           <div className="socials">
-            <a href="mailto:hola@maloba.studio">hola@maloba.studio</a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              Instagram ↗
+            <a
+              href="https://api.whatsapp.com/send?phone=523329292250"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Enviar mensaje a maloba por WhatsApp"
+            >
+              WhatsApp ↗
             </a>
-            <a href="https://behance.net" target="_blank" rel="noreferrer">
-              Behance ↗
+            <a href="https://instagram.com/maloba.mx" target="_blank" rel="noreferrer">
+              Instagram ↗
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noreferrer">
               LinkedIn ↗

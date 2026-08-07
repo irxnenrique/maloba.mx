@@ -31,6 +31,7 @@ database.exec(`
     concept TEXT NOT NULL,
     solution TEXT NOT NULL,
     cover_image TEXT,
+    gallery_images TEXT NOT NULL DEFAULT '[]',
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
   );
@@ -41,6 +42,13 @@ database.exec(`
   );
   CREATE INDEX IF NOT EXISTS sessions_expired_idx ON sessions(expired_at);
 `);
+
+const projectColumns = database.prepare('PRAGMA table_info(projects)').all();
+if (!projectColumns.some((column) => column.name === 'gallery_images')) {
+  database
+    .prepare("ALTER TABLE projects ADD COLUMN gallery_images TEXT NOT NULL DEFAULT '[]'")
+    .run();
+}
 
 const insertSeed = database.prepare(`
   INSERT OR IGNORE INTO projects (
@@ -75,6 +83,7 @@ export function rowToProject(row) {
     concept: row.concept,
     solution: row.solution,
     coverImage: row.cover_image || undefined,
+    galleryImages: JSON.parse(row.gallery_images || '[]'),
   };
 }
 

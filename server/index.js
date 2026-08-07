@@ -132,6 +132,11 @@ function normalizeProject(body) {
     ...project,
     services: body.services.map((item) => String(item).trim()).filter(Boolean),
     coverImage: body.coverImage ? String(body.coverImage) : null,
+    galleryImages: Array.isArray(body.galleryImages)
+      ? body.galleryImages
+          .map((item) => String(item))
+          .filter((item) => item.startsWith('/uploads/'))
+      : [],
   };
 }
 
@@ -143,18 +148,23 @@ app.put('/api/admin/projects/:slug', requireAdmin, requireAdminHeader, (request,
     .prepare(
       `INSERT INTO projects (
     slug, name, client, year, category, description, services, accent, secondary, artwork,
-    context, problem, concept, solution, cover_image
+    context, problem, concept, solution, cover_image, gallery_images
   ) VALUES (
     @slug, @name, @client, @year, @category, @description, @services, @accent, @secondary,
-    @artwork, @context, @problem, @concept, @solution, @coverImage
+    @artwork, @context, @problem, @concept, @solution, @coverImage, @galleryImages
   ) ON CONFLICT(slug) DO UPDATE SET
     name=excluded.name, client=excluded.client, year=excluded.year, category=excluded.category,
     description=excluded.description, services=excluded.services, accent=excluded.accent,
     secondary=excluded.secondary, artwork=excluded.artwork, context=excluded.context,
     problem=excluded.problem, concept=excluded.concept, solution=excluded.solution,
-    cover_image=excluded.cover_image, updated_at=CURRENT_TIMESTAMP`,
+    cover_image=excluded.cover_image, gallery_images=excluded.gallery_images,
+    updated_at=CURRENT_TIMESTAMP`,
     )
-    .run({ ...project, services: JSON.stringify(project.services) });
+    .run({
+      ...project,
+      services: JSON.stringify(project.services),
+      galleryImages: JSON.stringify(project.galleryImages),
+    });
   response.json(project);
 });
 
@@ -200,7 +210,7 @@ app.use((error, _request, response, _next) => {
 });
 
 const server = app.listen(port, '0.0.0.0', () =>
-  console.log(`Maloba API lista en http://0.0.0.0:${port}`),
+  console.log(`maloba API lista en http://0.0.0.0:${port}`),
 );
 
 function shutdown(signal) {

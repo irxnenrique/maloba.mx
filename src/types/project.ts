@@ -15,5 +15,6 @@ export interface Project {
   concept: string;
   solution: string;
   coverImage?: string;
+  galleryImages?: string[];
   isCustom?: boolean;
 }

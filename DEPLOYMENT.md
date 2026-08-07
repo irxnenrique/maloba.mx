@@ -1,4 +1,4 @@
-# Publicar Maloba en Railway y conectar GoDaddy
+# Publicar maloba en Railway y conectar GoDaddy
 
 Esta aplicación necesita un servicio Node persistente y un volumen. No debe desplegarse como un sitio estático porque la base SQLite y las portadas necesitan almacenamiento permanente.
 
@@ -30,7 +30,7 @@ Ejemplo si el proyecto todavía no tiene remoto:
 
 ```bash
 git add .
-git commit -m "Prepare Maloba for Railway"
+git commit -m "Prepare maloba for Railway"
 git branch -M main
 git remote add origin URL_DE_TU_REPOSITORIO
 git push -u origin main
@@ -50,7 +50,7 @@ git push -u origin main
 ## 4. Crear el volumen persistente
 
 1. En el canvas del proyecto, crea un **Volume**.
-2. Conéctalo al servicio web de Maloba.
+2. Conéctalo al servicio web de maloba.
 3. Configura el punto de montaje exactamente como:
 
 ```text
@@ -88,7 +88,7 @@ Después de guardar las variables, ejecuta un nuevo deployment.
 1. En **Settings → Networking**, genera un dominio temporal de Railway.
 2. Abre el portafolio y comprueba proyectos, imágenes y navegación.
 3. Abre directamente `/admin-maloba`.
-4. Inicia sesión, crea un proyecto de prueba y sube una portada.
+4. Inicia sesión, crea un proyecto de prueba, sube una portada y al menos cinco imágenes de galería.
 5. Reinicia el servicio desde Railway.
 6. Confirma que el proyecto y la portada continúan disponibles. Esto verifica el volumen.
 7. Elimina el proyecto de prueba desde el gestor.

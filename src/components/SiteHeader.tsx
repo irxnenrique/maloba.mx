@@ -17,7 +17,7 @@ export function SiteHeader() {
   }, [open]);
   return (
     <header className="site-header">
-      <Link to="/" className="brand" aria-label="Maloba, inicio" onClick={() => setOpen(false)}>
+      <Link to="/" className="brand" aria-label="maloba, inicio" onClick={() => setOpen(false)}>
         maloba<span>®</span>
       </Link>
       <button

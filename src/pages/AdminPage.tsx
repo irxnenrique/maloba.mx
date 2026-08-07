@@ -27,6 +27,7 @@ const blankForm = {
   concept: '',
   solution: '',
   coverImage: '',
+  galleryImages: [] as string[],
 };
 type FormState = typeof blankForm;
 
@@ -43,7 +44,7 @@ export function AdminPage() {
   return (
     <main className="admin-page">
       <Helmet>
-        <title>Acceso privado — Maloba®</title>
+        <title>Acceso privado — maloba®</title>
         <meta name="robots" content="noindex, nofollow, noarchive" />
       </Helmet>
       {auth === 'loading' && <div className="admin-loading">Verificando acceso…</div>}
@@ -82,7 +83,7 @@ function AdminLogin({ onSuccess }: { onSuccess: () => void }) {
     <section className="admin-login">
       <div className="admin-login-glow" aria-hidden="true" />
       <form onSubmit={submit}>
-        <span>Maloba® — Área privada</span>
+        <span>maloba® — Área privada</span>
         <h1>
           Acceso al
           <br />
@@ -141,6 +142,23 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
     }
   }
 
+  async function handleGallery(event: ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+    setUploading(true);
+    setError('');
+    try {
+      const uploaded: string[] = [];
+      for (const file of files) uploaded.push(await uploadCover(file));
+      update('galleryImages', [...form.galleryImages, ...uploaded]);
+      event.target.value = '';
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'No se pudieron subir las imágenes.');
+    } finally {
+      setUploading(false);
+    }
+  }
+
   function editProject(project: Project) {
     setForm({
       name: project.name,
@@ -157,6 +175,7 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
       concept: project.concept,
       solution: project.solution,
       coverImage: project.coverImage || '',
+      galleryImages: project.galleryImages || [],
     });
     setOriginalSlug(project.slug);
     setPublishedSlug('');
@@ -307,6 +326,44 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
                 disabled={uploading}
               />
             </label>
+            <div className="gallery-editor">
+              <label className="image-upload">
+                <ImagePlus />
+                <span>{uploading ? 'Subiendo imágenes…' : 'Agregar imágenes a la galería'}</span>
+                <small>Selección múltiple · sin límite de cantidad · máximo 5 MB por archivo</small>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  multiple
+                  onChange={handleGallery}
+                  disabled={uploading}
+                />
+              </label>
+              {form.galleryImages.length > 0 && (
+                <div className="gallery-editor-grid">
+                  {form.galleryImages.map((image, index) => (
+                    <figure key={`${image}-${index}`}>
+                      <img src={image} alt={`Galería ${index + 1}`} />
+                      <figcaption>
+                        <span>{String(index + 1).padStart(2, '0')}</span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            update(
+                              'galleryImages',
+                              form.galleryImages.filter((_, imageIndex) => imageIndex !== index),
+                            )
+                          }
+                          aria-label={`Quitar imagen ${index + 1}`}
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              )}
+            </div>
           </EditorSection>
 
           <EditorSection title="03 — Caso de estudio">

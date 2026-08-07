@@ -23,7 +23,7 @@ export function ProjectPage() {
       exit={reduce ? {} : { opacity: 0 }}
     >
       <Helmet>
-        <title>{project.name} — Maloba®</title>
+        <title>{project.name} — maloba®</title>
         <meta name="description" content={project.description} />
       </Helmet>
       <header className="case-header section-shell">
@@ -84,20 +84,38 @@ export function ProjectPage() {
         </Reveal>
       </section>
       <section className="case-gallery section-shell">
-        <Artwork
-          kind={project.artwork}
-          name={project.name}
-          accent={project.secondary}
-          secondary={project.accent}
-          variant="detail"
-        />
-        <Artwork
-          kind={project.artwork}
-          name={project.name}
-          accent={project.accent}
-          secondary="#f4efe5"
-          variant="detail"
-        />
+        {project.galleryImages?.length ? (
+          project.galleryImages.map((image, index) => (
+            <Reveal
+              key={`${image}-${index}`}
+              className={`gallery-item gallery-item-${(index % 5) + 1}`}
+            >
+              <img
+                src={image}
+                alt={`${project.name}, imagen de galería ${index + 1}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </Reveal>
+          ))
+        ) : (
+          <>
+            <Artwork
+              kind={project.artwork}
+              name={project.name}
+              accent={project.secondary}
+              secondary={project.accent}
+              variant="detail"
+            />
+            <Artwork
+              kind={project.artwork}
+              name={project.name}
+              accent={project.accent}
+              secondary="#f4efe5"
+              variant="detail"
+            />
+          </>
+        )}
       </section>
       <section className="solution section-shell">
         <p className="section-kicker">02 — La solución</p>

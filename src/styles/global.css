@@ -445,6 +445,12 @@ img {
   display: block;
   font-size: 1.5rem;
 }
+.whatsapp-note {
+  max-width: 330px;
+  margin: 0;
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
 .form-success {
   font-family: var(--serif);
   font-size: 2.2rem;
@@ -572,6 +578,31 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
+}
+.gallery-item {
+  min-width: 0;
+  overflow: hidden;
+  background: #e8e3db;
+}
+.gallery-item:nth-child(5n + 1),
+.gallery-item:nth-child(5n + 4) {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+}
+.gallery-item:nth-child(5n + 2),
+.gallery-item:nth-child(5n + 3),
+.gallery-item:nth-child(5n + 5) {
+  aspect-ratio: 4 / 5;
+}
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gallery-item:hover img {
+  transform: scale(1.015);
 }
 .solution {
   padding-block: var(--space-xl);
@@ -822,6 +853,43 @@ footer {
   height: 1px;
   opacity: 0;
 }
+.gallery-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.gallery-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.gallery-editor-grid figure {
+  min-width: 0;
+  margin: 0;
+  background: #e8e3db;
+}
+.gallery-editor-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.gallery-editor-grid figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.6rem;
+}
+.gallery-editor-grid figcaption span {
+  font-size: 0.65rem;
+}
+.gallery-editor-grid button {
+  display: grid;
+  place-items: center;
+  padding: 0.35rem;
+  border: 0;
+  background: transparent;
+}
 .editor-preview {
   position: sticky;
   top: 2rem;
@@ -1049,6 +1117,16 @@ footer {
   }
   .case-gallery {
     grid-template-columns: 1fr;
+  }
+  .gallery-item:nth-child(n) {
+    grid-column: auto;
+    aspect-ratio: 4 / 5;
+  }
+  .gallery-item:nth-child(3n + 1) {
+    aspect-ratio: 1 / 1;
+  }
+  .gallery-editor-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   .project-nav em {
     font-size: 1.5rem;

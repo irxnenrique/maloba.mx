@@ -1,4 +1,4 @@
-# Maloba® — Portafolio creativo
+# maloba® — Portafolio creativo
 
 Sitio de portafolio construido con React, TypeScript, Vite, React Router, Framer Motion y React Helmet Async. Todo el contenido y los recursos visuales son provisionales y están preparados para sustituirse.
 
@@ -22,8 +22,8 @@ npm run preview
 - **Colores, tipografías y espaciado:** edita `src/styles/tokens.css`.
 - **Estilos globales y responsive:** edita `src/styles/global.css`.
 - **Proyectos:** crea y actualiza contenido desde `/admin-maloba`. `src/data/projects.ts` funciona únicamente como respaldo si la API local no está disponible.
-- **Imágenes:** las portadas subidas desde el gestor se almacenan en `uploads/`. `Artwork.tsx` mantiene las composiciones gráficas para proyectos sin fotografía.
-- **Contacto:** edita correo y redes en `src/pages/HomePage.tsx`. El formulario es una demo frontend y no envía datos a un servidor.
+- **Imágenes:** las portadas y galerías subidas desde el gestor se almacenan en `uploads/`. La portada funciona como imagen principal y cada proyecto admite una cantidad abierta de imágenes de galería, limitada únicamente por el espacio disponible. `Artwork.tsx` mantiene las composiciones gráficas para proyectos sin fotografía.
+- **Contacto:** edita WhatsApp y redes en `src/pages/HomePage.tsx`. El formulario valida el nombre y el mensaje antes de abrir WhatsApp; no envía información automáticamente ni utiliza el servidor.
 - **Textos:** el contenido de inicio vive en `HomePage.tsx`; cada caso se controla desde `projects.ts`.
 
 ## Administración privada y base de datos
