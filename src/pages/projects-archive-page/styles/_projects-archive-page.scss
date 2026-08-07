@@ -124,12 +124,44 @@
 
   .archive-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 0.75rem;
   }
-}
 
-@include v.small-mobile {
-  .archive-grid {
-    grid-template-columns: 1fr;
+  .archive-year {
+    gap: 1.5rem;
+    padding: 3rem 0;
+
+    > h2 {
+      font-size: 2.75rem;
+    }
+  }
+
+  .archive-card {
+    .artwork {
+      aspect-ratio: 3 / 2;
+    }
+
+    &-meta {
+      gap: 0.4rem;
+      padding-top: 0.55rem;
+
+      h3 {
+        font-size: 1.05rem;
+        line-height: 1;
+      }
+
+      p {
+        margin-top: 0.3rem;
+        font-size: 0.58rem;
+        line-height: 1.25;
+      }
+
+      svg {
+        width: 15px;
+        height: 15px;
+        flex: 0 0 auto;
+      }
+    }
   }
 }
 .archive-load-more {

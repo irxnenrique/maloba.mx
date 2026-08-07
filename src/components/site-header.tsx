@@ -36,7 +36,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    <header className={open ? 'site-header menu-open' : 'site-header'}>
       <Link
         to={`/${language}`}
         className="brand"

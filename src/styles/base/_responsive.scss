@@ -3,6 +3,15 @@
 @include v.mobile {
   .site-header {
     height: 72px;
+
+    &.menu-open {
+      color: v.$white;
+
+      .brand {
+        position: relative;
+        z-index: 2;
+      }
+    }
   }
   .menu-button {
     display: block;
@@ -11,7 +20,8 @@
   .nav {
     position: fixed;
     inset: 0;
-    background: v.$lime;
+    background: v.$violet;
+    color: v.$white;
     padding: 7rem v.$gutter 3rem;
     display: flex;
     flex-direction: column;
