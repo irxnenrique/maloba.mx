@@ -64,6 +64,7 @@ export function ProjectPage() {
           name={project.name}
           accent={project.accent}
           secondary={project.secondary}
+          year={project.year}
           image={project.coverImage}
           variant="wide"
         />
@@ -122,6 +123,7 @@ export function ProjectPage() {
               name={project.name}
               accent={project.secondary}
               secondary={project.accent}
+              year={project.year}
               variant="detail"
             />
             <Artwork
@@ -129,6 +131,7 @@ export function ProjectPage() {
               name={project.name}
               accent={project.accent}
               secondary="#f4efe5"
+              year={project.year}
               variant="detail"
             />
           </>

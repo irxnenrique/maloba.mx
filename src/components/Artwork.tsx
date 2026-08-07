@@ -4,6 +4,7 @@ export function Artwork({
   name,
   accent,
   secondary,
+  year,
   image,
   variant = 'cover',
 }: {
@@ -11,6 +12,7 @@ export function Artwork({
   name: string;
   accent: string;
   secondary: string;
+  year: string;
   image?: string;
   variant?: 'cover' | 'detail' | 'wide';
 }) {
@@ -27,7 +29,7 @@ export function Artwork({
       <span className="art-shape b" />
       <span className="art-shape c" />
       <span className="art-label">{name}</span>
-      <span className="art-index">M—{name.length.toString().padStart(2, '0')}</span>
+      <span className="art-index">maloba® · {year}</span>
     </div>
   );
 }

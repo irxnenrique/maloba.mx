@@ -516,6 +516,7 @@ function ProjectEditor({ onLogout }: { onLogout: () => void }) {
             name={form.name || 'Nuevo proyecto'}
             accent={form.accent}
             secondary={form.secondary}
+            year={form.year}
             image={form.coverImage}
           />
           <h2>{form.name || 'Nombre del proyecto'}</h2>

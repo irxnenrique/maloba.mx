@@ -22,6 +22,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           name={project.name}
           accent={project.accent}
           secondary={project.secondary}
+          year={project.year}
           image={project.coverImage}
         />
         <div className="card-meta">
